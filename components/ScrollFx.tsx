@@ -46,11 +46,11 @@ export default function ScrollFx() {
           scrollTrigger: { trigger: ".hero-scene", start: "top top", end: "bottom top", scrub: true },
         });
       }
-      const heroCenter = document.querySelector(".hero-center");
-      if (heroCenter) {
-        gsap.to(heroCenter, {
-          yPercent: -18,
-          autoAlpha: 0.25,
+      const heroStage = document.querySelectorAll(".hero-stage, .hero-foot, .hero-cameo");
+      if (heroStage.length) {
+        gsap.to(heroStage, {
+          yPercent: -10,
+          autoAlpha: 0.2,
           ease: "none",
           scrollTrigger: { trigger: ".hero-scene", start: "top top", end: "88% top", scrub: true },
         });

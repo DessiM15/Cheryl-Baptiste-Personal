@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
+import CameoLockup from "./CameoLockup";
 
 const SUBSTACK = "https://substack.com/@cherylbaptiste";
 
@@ -37,11 +39,14 @@ export default function Hero() {
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay, defaults: { ease: "power4.out" } });
-      tl.fromTo(".giant .line-inner", { yPercent: 112 }, { yPercent: 0, duration: 1.25, stagger: 0.14 })
-        .fromTo(".hero-script", { autoAlpha: 0, scale: 0.92, rotate: -8 }, { autoAlpha: 1, scale: 1, rotate: -5, duration: 1 }, "-=0.55")
+      tl.fromTo(".hero-cameo", { autoAlpha: 0, y: -18 }, { autoAlpha: 1, y: 0, duration: 0.9 })
+        .fromTo(".giant-back .line-inner", { yPercent: 112 }, { yPercent: 0, duration: 1.25 }, "-=0.5")
+        .fromTo(".hero-portrait", { autoAlpha: 0, yPercent: 9, scale: 1.02 }, { autoAlpha: 1, yPercent: 0, scale: 1, duration: 1.5, ease: "power3.out" }, "-=0.9")
+        .fromTo(".giant-front .line-inner", { yPercent: 112 }, { yPercent: 0, duration: 1.2 }, "-=1.0")
+        .fromTo(".hero-script", { autoAlpha: 0, scale: 0.92, rotate: -8 }, { autoAlpha: 1, scale: 1, rotate: -5, duration: 1 }, "-=0.6")
         .fromTo(".side-word", { autoAlpha: 0, letterSpacing: "0.9em" }, { autoAlpha: 1, letterSpacing: "0.34em", duration: 1.1, stagger: 0.08 }, "-=0.8")
         .fromTo(
-          [".mood-toggle", ".hero-swap", ".hero-center .cta-row", ".scroll-cue"],
+          [".mood-toggle", ".hero-swap", ".hero-foot .cta-row", ".scroll-cue"],
           { autoAlpha: 0, y: 26 },
           { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.09 },
           "-=0.7"
@@ -59,16 +64,35 @@ export default function Hero() {
       </div>
       <div className="hero-veil" aria-hidden="true" />
 
+      <div className="hero-cameo" aria-hidden="true">
+        <CameoLockup size={54} name={false} spin onDark />
+      </div>
+
       <span className="side-word left" aria-hidden="true">Work &amp; Leadership</span>
       <span className="side-word right" aria-hidden="true">The Truth Between</span>
 
-      <div className="hero-center">
-        <h1 className="giant" aria-label="Cheryl Baptiste">
+      <div className="hero-stage" aria-hidden="true">
+        <span className="giant giant-back">
           <span className="line"><span className="line-inner">Cheryl</span></span>
+        </span>
+        <div className="hero-portrait">
+          <Image
+            src="/cheryl-duotone.png"
+            alt=""
+            width={1024}
+            height={1536}
+            priority
+            sizes="(max-width: 700px) 88vw, 46vh"
+          />
+        </div>
+        <span className="giant giant-front">
           <span className="line"><span className="line-inner">Baptiste</span></span>
-          <span className="hero-script" key={mood}>{m.script}</span>
-        </h1>
+        </span>
+        <span className="hero-script" key={mood}>{m.script}</span>
+      </div>
+      <h1 className="sr-only">Cheryl Baptiste — {m.sub}</h1>
 
+      <div className="hero-foot">
         <div className="mood-toggle" role="group" aria-label="Choose how to meet Cheryl">
           <button type="button" className={mood === "off" ? "on" : ""} aria-pressed={mood === "off"} onClick={() => setMood("off")}>
             Off the record
