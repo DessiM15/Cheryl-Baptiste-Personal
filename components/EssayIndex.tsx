@@ -40,6 +40,9 @@ export default function EssayIndex({ essays }: { essays: Essay[] }) {
 
     container.addEventListener("mousemove", move);
     container.addEventListener("mouseleave", leave);
+    // scrolling moves the page under a stationary cursor without firing
+    // mouseleave — hide the peek on any scroll so it can't strand on screen
+    window.addEventListener("scroll", leave, { passive: true });
     const rows = container.querySelectorAll<HTMLAnchorElement>(".essay-row");
     const handlers: Array<[HTMLAnchorElement, () => void]> = [];
     rows.forEach((row) => {
@@ -50,6 +53,7 @@ export default function EssayIndex({ essays }: { essays: Essay[] }) {
     return () => {
       container.removeEventListener("mousemove", move);
       container.removeEventListener("mouseleave", leave);
+      window.removeEventListener("scroll", leave);
       handlers.forEach(([row, fn]) => row.removeEventListener("mouseenter", fn));
     };
   }, []);
