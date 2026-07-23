@@ -56,7 +56,7 @@ export default function Hero() {
         </span>
         <div className="hero-portrait">
           <Image
-            src="/cheryl-duotone.png"
+            src="/cheryl-color.png"
             alt=""
             width={1024}
             height={1536}
