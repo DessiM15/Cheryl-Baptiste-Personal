@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Libre_Baskerville, Mulish } from "next/font/google";
+import { Playfair_Display, Libre_Baskerville, Mulish, Ephesis } from "next/font/google";
 import "./globals.css";
-import Cameo from "@/components/Cameo";
 import CameoIntro from "@/components/CameoIntro";
+import CameoLockup from "@/components/CameoLockup";
 import PalettePill from "@/components/PalettePill";
+import SiteHeader from "@/components/SiteHeader";
 
 const serif = Playfair_Display({
   subsets: ["latin"],
@@ -20,6 +21,12 @@ const body = Libre_Baskerville({
 const sans = Mulish({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+});
+const script = Ephesis({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-script",
   display: "swap",
 });
 
@@ -78,42 +85,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${serif.variable} ${body.variable} ${sans.variable}`}>
+      <body className={`${serif.variable} ${body.variable} ${sans.variable} ${script.variable}`}>
         <CameoIntro />
-
-        <header className="site-header">
-          <div className="wrap">
-            <a className="brand" href="/" aria-label="Cheryl Baptiste home">
-              <Cameo height={40} />
-              <span className="name">Cheryl Baptiste</span>
-            </a>
-            <nav className="main-nav" aria-label="Main">
-              <a href="/#essays">Essays</a>
-              <a href="/#media">Media</a>
-              <a href="/#about">About</a>
-              <a href="https://fgtsco.com" target="_blank" rel="noopener noreferrer">
-                FGT Solutions ↗
-              </a>
-              <a
-                className="btn quiet"
-                style={{ padding: "10px 18px" }}
-                href="https://substack.com/@cherylbaptiste"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Subscribe
-              </a>
-            </nav>
-          </div>
-        </header>
+        <SiteHeader />
 
         {children}
 
         <footer className="site-footer">
           <div className="wrap">
             <div className="cols">
-              <a className="brand" href="/" aria-label="Cheryl Baptiste home">
-                <Cameo height={34} />
+              <a href="/" aria-label="Cheryl Baptiste home" style={{ textDecoration: "none" }}>
+                <CameoLockup size={44} spin={false} />
               </a>
               <nav aria-label="Footer">
                 <a href="/#essays">Essays</a>

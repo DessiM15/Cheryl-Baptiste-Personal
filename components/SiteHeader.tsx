@@ -1,0 +1,76 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import CameoLockup from "./CameoLockup";
+
+const SUBSTACK = "https://substack.com/@cherylbaptiste";
+
+export default function SiteHeader() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 90);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const close = () => setOpen(false);
+
+  return (
+    <header
+      className={`site-header${scrolled ? " scrolled" : ""}${open ? " menu-open" : ""}`}
+    >
+      <div className="bar">
+        <nav className="side left" aria-label="Primary left">
+          <a href="/#essays">Essays</a>
+          <a href="/#media">Media</a>
+        </nav>
+
+        <a className="center-brand" href="/" aria-label="Cheryl Baptiste home">
+          <CameoLockup size={30} name spin onDark={false} />
+        </a>
+
+        <nav className="side right" aria-label="Primary right">
+          <a href="/#about">About</a>
+          <a href="https://fgtsco.com" target="_blank" rel="noopener noreferrer">
+            FGT&nbsp;↗
+          </a>
+        </nav>
+
+        <button
+          className="burger"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+        >
+          <span /><span /><span />
+        </button>
+      </div>
+
+      <div className={`menu-overlay${open ? " open" : ""}`} aria-hidden={!open}>
+        <CameoLockup size={64} onDark spin />
+        <div style={{ height: 18 }} />
+        <a className="item" href="/#essays" onClick={close}>Essays</a>
+        <a className="item" href="/#media" onClick={close}>Media</a>
+        <a className="item" href="/#about" onClick={close}>About</a>
+        <a className="item" href="https://fgtsco.com" target="_blank" rel="noopener noreferrer" onClick={close}>
+          FGT Solutions ↗
+        </a>
+        <div className="small-row">
+          <a className="btn on-dark" href={SUBSTACK} target="_blank" rel="noopener noreferrer">
+            Subscribe on Substack
+          </a>
+        </div>
+      </div>
+    </header>
+  );
+}
