@@ -99,6 +99,24 @@ export default function ScrollFx() {
         );
       });
 
+      // pinned quote scene: words surface one by one as you scroll through
+      const quoteWords = document.querySelectorAll(".quote-words .w");
+      if (quoteWords.length && !isMobile) {
+        const qtl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".quote-scene",
+            start: "top top",
+            end: "+=120%",
+            pin: true,
+            scrub: true,
+            anticipatePin: 1,
+          },
+        });
+        qtl
+          .fromTo(quoteWords, { opacity: 0.14 }, { opacity: 1, stagger: 0.09, ease: "none" })
+          .fromTo(".quote-arch", { yPercent: 7, scale: 1.05 }, { yPercent: -4, scale: 1, ease: "none" }, 0);
+      }
+
       // soft rise for everything tagged gs-reveal
       ScrollTrigger.batch(".gs-reveal", {
         start: "top 86%",

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Hero from "@/components/Hero";
 import ScrollFx from "@/components/ScrollFx";
+import EssayIndex from "@/components/EssayIndex";
 
 const SUBSTACK = "https://substack.com/@cherylbaptiste";
 
@@ -11,6 +12,7 @@ const ESSAYS = [
     date: "June 22, 2026",
     excerpt:
       "Say you're in HR at a social event and watch what happens. There's a pause. A slight wince. Maybe a joke about watching what they say around you now. HR has become a punchline, a warning, a four-letter word dressed up in two letters — and honesty matters more to me than defensiveness about how we got here.",
+    peek: "/img/plaster-warm.jpg",
   },
   {
     n: "02",
@@ -18,8 +20,12 @@ const ESSAYS = [
     date: "June 15, 2026",
     excerpt:
       "I was on a call recently with an HR leader I deeply respect. She stepped down from a CHRO role to take a director position. Not because she failed. Somewhere in that conversation, she said it plainly: we don't hate our jobs. We hate what our jobs have become. I haven't stopped thinking about it since.",
+    peek: "/img/arch-cream.jpg",
   },
 ];
+
+const QUOTE_A = ["We", "don't", "hate", "our", "jobs."];
+const QUOTE_B = ["We", "hate", "what", "our", "jobs", "have", "become."];
 
 const TICKER = ["Work", "Leadership", "Identity", "Ambition", "Honesty"];
 
@@ -67,19 +73,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="essay-index">
-            {ESSAYS.map((e) => (
-              <a key={e.n} className="essay-row gs-reveal" href={SUBSTACK} target="_blank" rel="noopener noreferrer">
-                <span className="num">{e.n}</span>
-                <span className="body">
-                  <span className="date">{e.date}</span>
-                  <h3>{e.title}</h3>
-                  <p>{e.excerpt}</p>
-                </span>
-                <span className="go" aria-hidden="true">→</span>
-              </a>
-            ))}
-          </div>
+          <EssayIndex essays={ESSAYS} />
           <div className="essays-cta gs-reveal">
             <a className="btn quiet" href={SUBSTACK} target="_blank" rel="noopener noreferrer">
               Read all essays on Substack
@@ -91,15 +85,20 @@ export default function Home() {
       {/* ---------- quote · olive ---------- */}
       <section className="block-olive quote-scene">
         <div className="wrap quote-grid">
-          <div className="arch-frame quote-arch" data-parallax="8">
+          <div className="arch-frame quote-arch">
             <Image src="/img/olive-shadow.jpg" alt="" width={900} height={1200} sizes="(max-width: 880px) 70vw, 380px" />
           </div>
           <div>
             <p className="script-note gs-reveal">the quiet part</p>
-            <blockquote className="display" data-lines>
-              <span className="line"><span className="line-inner">We don&apos;t hate our jobs.</span></span>
-              <span className="line"><span className="line-inner"><em>We hate what our jobs</em></span></span>
-              <span className="line"><span className="line-inner"><em>have become.</em></span></span>
+            <blockquote className="display quote-words">
+              {QUOTE_A.map((w, i) => (
+                <span key={`a${i}`} className="w">{w}</span>
+              ))}{" "}
+              <em>
+                {QUOTE_B.map((w, i) => (
+                  <span key={`b${i}`} className="w">{w}</span>
+                ))}
+              </em>
             </blockquote>
             <p className="attribution gs-reveal">From the essays</p>
           </div>
