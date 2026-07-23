@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import CameoLockup from "./CameoLockup";
@@ -9,12 +9,30 @@ const SUBSTACK = "https://substack.com/@cherylbaptiste";
 
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
+  const [coldOpen, setColdOpen] = useState<"off" | "play" | "fade">("off");
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const introDone = document.documentElement.dataset.intro === "done";
+    const wantsOpen = !reduced && !introDone && window.innerWidth > 700;
+    if (wantsOpen) {
+      setColdOpen("play");
+      const t1 = setTimeout(() => setColdOpen("fade"), 3600);
+      const t2 = setTimeout(() => setColdOpen("off"), 5100);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+      };
+    }
+  }, []);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
     const introDone = document.documentElement.dataset.intro === "done";
-    const delay = introDone ? 0.15 : 2.6;
+    const wantsOpen = !introDone && window.innerWidth > 700;
+    // cold-open sessions hold the type reveal until her clip starts melting away
+    const delay = introDone ? 0.15 : wantsOpen ? 3.9 : 2.6;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay, defaults: { ease: "power4.out" } });
@@ -42,6 +60,14 @@ export default function Hero() {
         </video>
       </div>
       <div className="hero-veil" aria-hidden="true" />
+
+      {coldOpen !== "off" && (
+        <div className={`hero-open${coldOpen === "fade" ? " fading" : ""}`} aria-hidden="true">
+          <video autoPlay muted playsInline preload="auto">
+            <source src="/img/hero-open.mp4" type="video/mp4" />
+          </video>
+        </div>
+      )}
 
       <div className="hero-cameo" aria-hidden="true">
         <CameoLockup size={54} name={false} spin onDark />

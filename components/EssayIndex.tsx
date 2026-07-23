@@ -26,35 +26,43 @@ export default function EssayIndex({ essays }: { essays: Essay[] }) {
     const el = peek.current;
     const xTo = gsap.quickTo(el, "x", { duration: 0.5, ease: "power3.out" });
     const yTo = gsap.quickTo(el, "y", { duration: 0.5, ease: "power3.out" });
+    let visible = false;
 
+    const hide = () => {
+      if (!visible) return;
+      visible = false;
+      gsap.to(el, { autoAlpha: 0, scale: 0.92, duration: 0.3, ease: "power3.in", overwrite: true });
+    };
+
+    // Everything is driven by real pointer movement. Hover state that appears
+    // because the page scrolled under a stationary cursor never shows the peek,
+    // and the peek can never appear at a stale position.
     const move = (e: MouseEvent) => {
-      xTo(e.clientX + 28);
-      yTo(e.clientY - 130);
-    };
-    const container = wrap.current;
-    const enterRow = (src: string) => () => {
+      const row = (e.target as HTMLElement).closest?.(".essay-row") as HTMLElement | null;
+      if (!row) {
+        hide();
+        return;
+      }
+      const src = row.dataset.peek || "";
       if (img.current && img.current.getAttribute("src") !== src) img.current.src = src;
-      gsap.to(el, { autoAlpha: 1, scale: 1, duration: 0.45, ease: "power3.out" });
+      if (!visible) {
+        visible = true;
+        gsap.set(el, { x: e.clientX + 28, y: e.clientY - 130 });
+        gsap.to(el, { autoAlpha: 1, scale: 1, duration: 0.4, ease: "power3.out", overwrite: true });
+      } else {
+        xTo(e.clientX + 28);
+        yTo(e.clientY - 130);
+      }
     };
-    const leave = () => gsap.to(el, { autoAlpha: 0, scale: 0.92, duration: 0.35, ease: "power3.in" });
 
+    const container = wrap.current;
     container.addEventListener("mousemove", move);
-    container.addEventListener("mouseleave", leave);
-    // scrolling moves the page under a stationary cursor without firing
-    // mouseleave — hide the peek on any scroll so it can't strand on screen
-    window.addEventListener("scroll", leave, { passive: true });
-    const rows = container.querySelectorAll<HTMLAnchorElement>(".essay-row");
-    const handlers: Array<[HTMLAnchorElement, () => void]> = [];
-    rows.forEach((row) => {
-      const fn = enterRow(row.dataset.peek || "");
-      row.addEventListener("mouseenter", fn);
-      handlers.push([row, fn]);
-    });
+    container.addEventListener("mouseleave", hide);
+    window.addEventListener("scroll", hide, { passive: true });
     return () => {
       container.removeEventListener("mousemove", move);
-      container.removeEventListener("mouseleave", leave);
-      window.removeEventListener("scroll", leave);
-      handlers.forEach(([row, fn]) => row.removeEventListener("mouseenter", fn));
+      container.removeEventListener("mouseleave", hide);
+      window.removeEventListener("scroll", hide);
     };
   }, []);
 

@@ -1,16 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import CameoLockup from "./CameoLockup";
 
 const SUBSTACK = "https://substack.com/@cherylbaptiste";
 
 export default function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const [atTop, setAtTop] = useState(true);
   const [open, setOpen] = useState(false);
+  const scrolled = !atTop || pathname !== "/";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 90);
+    const onScroll = () => setAtTop(window.scrollY <= 90);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -33,6 +36,7 @@ export default function SiteHeader() {
         <nav className="side left" aria-label="Primary left">
           <a href="/#essays">Essays</a>
           <a href="/#media">Media</a>
+          <a href="/through-my-eyes">Gallery</a>
         </nav>
 
         <a className="center-brand" href="/" aria-label="Cheryl Baptiste home">
@@ -61,6 +65,7 @@ export default function SiteHeader() {
         <div style={{ height: 18 }} />
         <a className="item" href="/#essays" onClick={close}>Essays</a>
         <a className="item" href="/#media" onClick={close}>Media</a>
+        <a className="item" href="/through-my-eyes" onClick={close}>Through my eyes</a>
         <a className="item" href="/#about" onClick={close}>About</a>
         <a className="item" href="https://fgtsco.com" target="_blank" rel="noopener noreferrer" onClick={close}>
           FGT Solutions ↗

@@ -107,6 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <nav aria-label="Footer">
                 <a href="/#essays">Essays</a>
                 <a href="/#media">Media</a>
+                <a href="/through-my-eyes">Through my eyes</a>
                 <a href="/#about">About</a>
                 <a
                   href="https://www.linkedin.com/in/cheryl-l-baptiste-56567723"

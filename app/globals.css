@@ -550,3 +550,56 @@ section { padding-block: clamp(64px, 10vh, 120px); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* ================= hero cold-open ================= */
+.hero-open {
+  position: absolute; inset: 0; z-index: 1;
+  opacity: 1; transition: opacity 1.4s ease;
+}
+.hero-open video { width: 100%; height: 100%; object-fit: cover; }
+.hero-open::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(14, 9, 5, .5), rgba(14, 9, 5, .22) 45%, rgba(14, 9, 5, .55));
+}
+.hero-open.fading { opacity: 0; }
+
+/* ================= living portrait + talk player ================= */
+.arch-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.talk-frame {
+  position: relative; aspect-ratio: 1 / 1; max-width: 460px; justify-self: end;
+  border-radius: 10px; overflow: hidden;
+  border: 1px solid rgba(244, 237, 226, .18); background: #000;
+}
+@media (max-width: 860px) { .talk-frame { justify-self: start; max-width: 100%; } }
+.talk-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.media-secondary { margin-top: clamp(56px, 9vh, 90px); padding-top: clamp(40px, 6vh, 64px); border-top: 1px solid rgba(244, 237, 226, .12); }
+
+/* ================= gallery · through my eyes ================= */
+.gallery-page { background: var(--ground); }
+.gallery-head { padding: 150px 0 30px; }
+.gallery-head .display { margin-top: 6px; }
+.gallery-grid-wrap { padding-top: 20px; }
+.gallery-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  gap: clamp(20px, 3vw, 44px); align-items: start;
+}
+.shot { grid-column: span 2; margin: 0; }
+.shot.wide { grid-column: span 4; }
+.shot.tall { grid-column: span 2; }
+@media (max-width: 880px) {
+  .shot, .shot.wide, .shot.tall { grid-column: span 3; }
+}
+@media (max-width: 560px) {
+  .shot, .shot.wide, .shot.tall { grid-column: span 6; }
+}
+.shot-frame { overflow: hidden; border-radius: 6px; }
+.shot .arch-frame img, .shot .shot-frame img { width: 100%; height: auto; }
+.shot:nth-child(odd) { transform: translateY(clamp(0px, 3vw, 34px)); }
+.shot figcaption { display: flex; flex-direction: column; gap: 2px; margin-top: 14px; }
+.shot .place {
+  font-size: 11px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--deep); font-weight: 700;
+}
+.shot .cap { font-family: var(--font-script), cursive; font-size: 24px; color: var(--accent); line-height: 1.2; }
+.gallery-close { text-align: center; padding-block: clamp(80px, 12vh, 130px); }
+.gallery-close .btn { margin-top: 20px; }

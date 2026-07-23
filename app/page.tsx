@@ -69,7 +69,7 @@ export default function Home() {
               </p>
             </div>
             <div className="arch-frame essays-arch" data-parallax="6">
-              <Image src="/img/arch-cream.jpg" alt="" width={900} height={1200} sizes="(max-width: 820px) 60vw, 320px" />
+              <Image src="/img/panel.jpg" alt="Cheryl Baptiste speaking on a panel" width={1400} height={1050} sizes="(max-width: 820px) 60vw, 320px" />
             </div>
           </div>
 
@@ -86,7 +86,9 @@ export default function Home() {
       <section className="block-olive quote-scene">
         <div className="wrap quote-grid">
           <div className="arch-frame quote-arch">
-            <Image src="/img/olive-shadow.jpg" alt="" width={900} height={1200} sizes="(max-width: 880px) 70vw, 380px" />
+            <video autoPlay muted loop playsInline preload="metadata" aria-label="Cheryl Baptiste, in conversation">
+              <source src="/img/cheryl-loop.mp4" type="video/mp4" />
+            </video>
           </div>
           <div>
             <p className="script-note gs-reveal">the quiet part</p>
@@ -109,7 +111,22 @@ export default function Home() {
       <section className="block-espresso" id="media">
         <div className="wrap media-grid">
           <div className="gs-reveal">
-            <p className="script-note">in conversation</p>
+            <p className="script-note">in her words</p>
+            <h2 className="display-sm">Hear it from Cheryl directly.</h2>
+            <p className="on-dark-soft">
+              Three minutes of exactly what it sounds like to work with her — candid, warm, and
+              zero corporate polish.
+            </p>
+          </div>
+          <div className="talk-frame gs-reveal">
+            <video controls playsInline preload="metadata" poster="/img/cheryl-talk-poster.jpg">
+              <source src="/img/cheryl-talk.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+        <div className="wrap media-grid media-secondary">
+          <div className="gs-reveal">
+            <p className="eyebrow" style={{ color: "var(--on-deep-soft)" }}>In conversation</p>
             <h2 className="display-sm">The podcast: leaving corporate, on her own terms.</h2>
             <p className="on-dark-soft">
               Cheryl joins the conversation to talk about walking away from corporate HR leadership,
