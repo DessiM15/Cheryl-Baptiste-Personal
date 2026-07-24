@@ -5,7 +5,7 @@ import ScrollFx from "@/components/ScrollFx";
 export const metadata: Metadata = {
   title: "Through my eyes",
   description:
-    "Places the work has taken Cheryl Baptiste — panels, boardrooms, and conference floors, in her own snapshots.",
+    "Places the work has taken Cheryl Baptiste: panels, boardrooms, and conference floors, in her own snapshots.",
 };
 
 type Shot = {
@@ -31,7 +31,7 @@ const SHOTS: Shot[] = [
   {
     src: "/img/gallery/g-ucla.jpg",
     place: "UCLA Anderson School of Business",
-    caption: "DEI panel — in conversation",
+    caption: "DEI panel, in conversation",
     w: 1400,
     h: 1050,
     span: "wide",
@@ -89,7 +89,7 @@ export default function ThroughMyEyes() {
             <span className="line"><span className="line-inner">Through my eyes.</span></span>
           </h1>
           <p className="sec-sub gs-reveal">
-            Panels, boardrooms, conference floors — the rooms this work opens, as I saw them.
+            Panels, boardrooms, conference floors. The rooms this work opens, as I saw them.
           </p>
         </div>
       </section>
@@ -102,7 +102,7 @@ export default function ThroughMyEyes() {
                 <div className={s.arch ? "arch-frame" : "shot-frame"}>
                   <Image
                     src={s.src}
-                    alt={`${s.place} — ${s.caption}`}
+                    alt={`${s.place}: ${s.caption}`}
                     width={s.w}
                     height={s.h}
                     sizes="(max-width: 700px) 92vw, 44vw"

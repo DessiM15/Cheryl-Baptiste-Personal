@@ -11,8 +11,7 @@ const ESSAYS = [
     title: "HR Has Become a Bad Word. And We Did That to Ourselves.",
     date: "June 22, 2026",
     excerpt:
-      "Say you're in HR at a social event and watch what happens. There's a pause. A slight wince. Maybe a joke about watching what they say around you now. HR has become a punchline, a warning, a four-letter word dressed up in two letters — and honesty matters more to me than defensiveness about how we got here.",
-    peek: "/img/plaster-warm.jpg",
+      "Say you're in HR at a social event and watch what happens. There's a pause. A slight wince. Maybe a joke about watching what they say around you now. HR has become a punchline, a warning, a four-letter word dressed up in two letters. Honesty matters more to me than defensiveness about how we got here.",
   },
   {
     n: "02",
@@ -20,7 +19,6 @@ const ESSAYS = [
     date: "June 15, 2026",
     excerpt:
       "I was on a call recently with an HR leader I deeply respect. She stepped down from a CHRO role to take a director position. Not because she failed. Somewhere in that conversation, she said it plainly: we don't hate our jobs. We hate what our jobs have become. I haven't stopped thinking about it since.",
-    peek: "/img/arch-cream.jpg",
   },
 ];
 
@@ -61,7 +59,7 @@ export default function Home() {
             <div>
               <p className="eyebrow gs-reveal">The Essays</p>
               <h2 className="display" data-lines>
-                <span className="line"><span className="line-inner">Honest writing about work —</span></span>
+                <span className="line"><span className="line-inner">Honest writing about work,</span></span>
                 <span className="line"><span className="line-inner">from someone <em>in the room.</em></span></span>
               </h2>
               <p className="sec-sub gs-reveal">
@@ -111,11 +109,12 @@ export default function Home() {
       <section className="block-espresso" id="media">
         <div className="wrap media-grid">
           <div className="gs-reveal">
-            <p className="script-note">in her words</p>
-            <h2 className="display-sm">Hear it from Cheryl directly.</h2>
+            <p className="script-note">for the record</p>
+            <h2 className="display-sm">Executive of the Year, 2024.</h2>
             <p className="on-dark-soft">
-              Three minutes of exactly what it sounds like to work with her — candid, warm, and
-              zero corporate polish.
+              Filmed when Cheryl was named Executive of the Year in 2024, during her corporate
+              years at Murad. Candid, warm, and zero corporate polish. This is what it sounds
+              like when she is in the room.
             </p>
           </div>
           <div className="talk-frame gs-reveal">
@@ -130,8 +129,8 @@ export default function Home() {
             <h2 className="display-sm">The podcast: leaving corporate, on her own terms.</h2>
             <p className="on-dark-soft">
               Cheryl joins the conversation to talk about walking away from corporate HR leadership,
-              what she watched the profession become, and why she bet on herself — cued to the
-              moment she comes in.
+              what she watched the profession become, and why she bet on herself. It&apos;s audio
+              only, cued to the moment she comes in. Press play and listen.
             </p>
           </div>
           <div className="video-frame gs-reveal">
@@ -155,10 +154,10 @@ export default function Home() {
             <div className="about-body">
               <p className="lead-in gs-reveal">
                 I got into this work because someone saw something in me before I saw it in
-                myself — and I&apos;ve spent my career trying to be that person for others.
+                myself. I&apos;ve spent my career trying to be that person for others.
               </p>
               <p className="gs-reveal">
-                I&apos;m a grassroots, nontraditional HR leader. No formal HR training — a business
+                I&apos;m a grassroots, nontraditional HR leader. No formal HR training. A business
                 degree with a minor in finance, magna cum laude, a master&apos;s in education, and
                 everything else learned the real way: inside technology companies, sales floors,
                 distribution centers, property management firms, and beauty brands. What I found
@@ -168,14 +167,14 @@ export default function Home() {
               <p className="gs-reveal">
                 Early in my career I decided my integrity was not for sale. Not for a title, not for
                 job security, not to make a difficult moment easier. That decision has cost me a few
-                times. I&apos;d make it again every time — because the person in the room who tells
+                times. I&apos;d make it again every time, because the person in the room who tells
                 the truth about what&apos;s happening, regardless of which side you&apos;re on, is
                 the person organizations actually need.
               </p>
               <p className="gs-reveal">
                 In 2022 I founded FGT Solutions, and in 2025 I left corporate to run it full time.
-                These days I split myself between advising leaders and writing essays about work,
-                leadership, and the journey from employee to entrepreneur — the honest version.
+                These days I write, I speak, and I advise leaders one on one. The essays are about
+                work, leadership, and the journey from employee to entrepreneur. The honest version.
               </p>
             </div>
           </div>
@@ -196,14 +195,15 @@ export default function Home() {
         <div className="wrap">
           <p className="eyebrow gs-reveal">When it&apos;s your organization</p>
           <h2 className="display" data-lines>
-            <span className="line"><span className="line-inner">The writing is free.</span></span>
-            <span className="line"><span className="line-inner"><em>The truth about your</em></span></span>
-            <span className="line"><span className="line-inner"><em>organization is a project.</em></span></span>
+            <span className="line"><span className="line-inner">The essays live here.</span></span>
+            <span className="line"><span className="line-inner"><em>The organizational work</em></span></span>
+            <span className="line"><span className="line-inner"><em>has a firm of its own.</em></span></span>
           </h2>
           <div className="bridge-row gs-reveal">
             <p>
-              My firm, FGT Solutions, partners with founders and senior leaders when growth,
-              pressure, and people issues have outgrown the old way of doing things.
+              This site is where I write, speak, and advise. When an organization needs more than
+              words, my firm, FGT Solutions, partners with founders and senior leaders to name
+              what&apos;s happening and fix it.
             </p>
             <a className="btn on-dark" href="https://fgtsco.com" target="_blank" rel="noopener noreferrer">
               Visit FGT Solutions
@@ -221,7 +221,7 @@ export default function Home() {
             <span className="line"><span className="line-inner"><em>important to have alone.</em></span></span>
           </h2>
           <p className="on-dark-soft closing-sub gs-reveal">
-            New essays on work, leadership, and the truth in between — delivered by Substack, free.
+            New essays on work, leadership, and the truth in between, delivered by Substack, free.
             If you&apos;ve felt any of this, or you&apos;re watching it happen around you: come say so.
           </p>
           <div className="gs-reveal">

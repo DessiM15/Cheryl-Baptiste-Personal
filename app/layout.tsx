@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Libre_Baskerville, Mulish, Ephesis } from "next/font/google";
+import { Playfair_Display, Libre_Baskerville, Mulish, Ephesis, Allison } from "next/font/google";
 import "./globals.css";
 import CameoIntro from "@/components/CameoIntro";
 import CameoLockup from "@/components/CameoLockup";
@@ -29,11 +29,17 @@ const script = Ephesis({
   variable: "--font-script",
   display: "swap",
 });
+const signature = Allison({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-signature",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cherylbaptiste.com"),
   title: {
-    default: "Cheryl Baptiste — Work, leadership, and the truth in between",
+    default: "Cheryl Baptiste · Work, leadership, and the truth in between",
     template: "%s · Cheryl Baptiste",
   },
   description:
@@ -45,7 +51,7 @@ export const metadata: Metadata = {
     siteName: "Cheryl Baptiste",
     locale: "en_US",
     type: "website",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Cheryl Baptiste — saying the quiet part out loud" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Cheryl Baptiste, saying the quiet part out loud" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -92,7 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${serif.variable} ${body.variable} ${sans.variable} ${script.variable}`}>
+      <body className={`${serif.variable} ${body.variable} ${sans.variable} ${script.variable} ${signature.variable}`}>
         <CameoIntro />
         <SiteHeader />
 

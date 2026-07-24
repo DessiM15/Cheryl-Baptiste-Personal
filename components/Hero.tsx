@@ -37,10 +37,8 @@ export default function Hero() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay, defaults: { ease: "power4.out" } });
       tl.fromTo(".hero-cameo", { autoAlpha: 0, y: -18 }, { autoAlpha: 1, y: 0, duration: 0.9 })
-        .fromTo(".giant-back .line-inner", { yPercent: 112 }, { yPercent: 0, duration: 1.25 }, "-=0.5")
-        .fromTo(".hero-portrait", { autoAlpha: 0, yPercent: 9, scale: 1.02 }, { autoAlpha: 1, yPercent: 0, scale: 1, duration: 1.5, ease: "power3.out" }, "-=0.9")
-        .fromTo(".giant-front .line-inner", { yPercent: 112 }, { yPercent: 0, duration: 1.2 }, "-=1.0")
-        .fromTo(".hero-script", { autoAlpha: 0, scale: 0.92, rotate: -8 }, { autoAlpha: 1, scale: 1, rotate: -5, duration: 1 }, "-=0.6")
+        .fromTo(".hero-portrait", { autoAlpha: 0, yPercent: 9, scale: 1.02 }, { autoAlpha: 1, yPercent: 0, scale: 1, duration: 1.5, ease: "power3.out" }, "-=0.4")
+        .fromTo(".hero-sig", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 1.2 }, "-=0.8")
         .fromTo(".side-word", { autoAlpha: 0, letterSpacing: "0.9em" }, { autoAlpha: 1, letterSpacing: "0.34em", duration: 1.1, stagger: 0.08 }, "-=0.8")
         .fromTo(
           [".hero-swap", ".hero-foot .cta-row", ".scroll-cue"],
@@ -77,9 +75,6 @@ export default function Hero() {
       <span className="side-word right" aria-hidden="true">The Truth Between</span>
 
       <div className="hero-stage" aria-hidden="true">
-        <span className="giant giant-back">
-          <span className="line"><span className="line-inner">Cheryl</span></span>
-        </span>
         <div className="hero-portrait">
           <Image
             src="/cheryl-color.png"
@@ -90,16 +85,14 @@ export default function Hero() {
             sizes="(max-width: 700px) 88vw, 46vh"
           />
         </div>
-        <span className="giant giant-front">
-          <span className="line"><span className="line-inner">Baptiste</span></span>
-        </span>
-        <span className="hero-script">saying the quiet part out loud</span>
+        <span className="hero-sig">Cheryl Baptiste</span>
       </div>
-      <h1 className="sr-only">Cheryl Baptiste — Essays · Conversations · California</h1>
+      <h1 className="sr-only">Cheryl Baptiste: writing, speaking, advisory. Saying the quiet part out loud.</h1>
 
       <div className="hero-foot">
         <div className="hero-swap">
-          <p className="hero-sub">Essays · Conversations · California</p>
+          <p className="hero-tag" aria-hidden="true">saying the quiet part out loud</p>
+          <p className="hero-sub">Writing · Speaking · Advisory</p>
         </div>
 
         <div className="cta-row">
