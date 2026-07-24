@@ -109,12 +109,12 @@ export default function Home() {
       <section className="block-espresso" id="media">
         <div className="wrap media-grid">
           <div className="gs-reveal">
-            <p className="script-note">for the record</p>
-            <h2 className="display-sm">Executive of the Year, 2024.</h2>
+            <p className="script-note">in her own words</p>
+            <h2 className="display-sm">Leaving corporate, on her own terms.</h2>
             <p className="on-dark-soft">
-              Filmed when Cheryl was named Executive of the Year in 2024, during her corporate
-              years at Murad. Candid, warm, and zero corporate polish. This is what it sounds
-              like when she is in the room.
+              Cheryl on walking away from corporate HR leadership, what she watched the
+              profession become, and why she bet on herself. Candid, warm, and zero corporate
+              polish. This is what it sounds like when she is in the room.
             </p>
           </div>
           <div className="talk-frame gs-reveal">
@@ -125,18 +125,18 @@ export default function Home() {
         </div>
         <div className="wrap media-grid media-secondary">
           <div className="gs-reveal">
-            <p className="eyebrow" style={{ color: "var(--on-deep-soft)" }}>In conversation</p>
-            <h2 className="display-sm">The podcast: leaving corporate, on her own terms.</h2>
+            <p className="eyebrow" style={{ color: "var(--on-deep-soft)" }}>For the record</p>
+            <h2 className="display-sm">Executive of the Year, 2024.</h2>
             <p className="on-dark-soft">
-              Cheryl joins the conversation to talk about walking away from corporate HR leadership,
-              what she watched the profession become, and why she bet on herself. It&apos;s audio
-              only, cued to the moment she comes in. Press play and listen.
+              When Cheryl was named HR Executive of the Year during her corporate years at Murad,
+              the cameras turned to her, her team, and her boss to ask what it&apos;s like to work
+              with her. Cued to the moment her segment begins.
             </p>
           </div>
           <div className="video-frame gs-reveal">
             <iframe
               src="https://www.youtube-nocookie.com/embed/SIgFALciS-0?start=302"
-              title="Cheryl Baptiste podcast conversation"
+              title="Cheryl Baptiste, HR Executive of the Year 2024"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
