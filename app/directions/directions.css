@@ -1,0 +1,476 @@
+/* ==========================================================================
+   Visual directions — internal review only. Delete this folder once Dessi
+   picks one and the winner is folded into the real pages.
+   Everything is scoped under .dirpage so nothing leaks into the live site.
+   ========================================================================== */
+
+.dirpage .bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+.dirpage .wrap-wide {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-inline: clamp(20px, 4vw, 48px);
+}
+.dirpage .ticker-run { display: flex; gap: 3.2em; }
+.dirpage .on-ink { color: var(--on-deep); }
+
+/* ---------- direction switcher ---------- */
+.dirnav {
+  position: fixed; z-index: 80; left: 50%; bottom: 18px;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 4px;
+  padding: 6px; border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 90%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 34px -12px rgba(20, 18, 16, .6);
+}
+.dirnav-home {
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase; font-weight: 700;
+  color: var(--on-deep-soft); text-decoration: none; padding: 8px 12px;
+}
+.dirnav-item {
+  font-size: 11px; letter-spacing: .1em; font-weight: 600;
+  color: var(--on-deep-soft); text-decoration: none;
+  padding: 8px 14px; border-radius: 999px; white-space: nowrap;
+  transition: background .2s ease, color .2s ease;
+}
+.dirnav-item:hover { color: var(--on-deep); }
+.dirnav-item.on { background: var(--on-deep); color: var(--ink); }
+@media (max-width: 620px) {
+  .dirnav { bottom: 10px; gap: 2px; padding: 4px; }
+  .dirnav-home { display: none; }
+  .dirnav-item { padding: 7px 10px; font-size: 10px; }
+}
+
+/* ---------- directions index ---------- */
+.dirindex { padding: 150px 0 120px; }
+.dirindex h1 {
+  font-family: var(--font-serif), Georgia, serif; font-weight: 400;
+  font-size: clamp(36px, 5.4vw, 68px); line-height: 1.08;
+}
+.dirindex .lede { color: var(--ink-soft); margin-top: 18px; max-width: 56ch; }
+.dircards {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 22px; margin-top: 54px;
+}
+.dircard {
+  display: block; text-decoration: none;
+  border: 1px solid var(--hairline); border-radius: 4px;
+  padding: 30px 26px 26px; background: var(--card);
+  transition: border-color .2s ease, transform .2s ease;
+}
+.dircard:hover { border-color: var(--deep); transform: translateY(-3px); }
+.dircard .tag {
+  font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+  font-weight: 700; color: var(--accent);
+}
+.dircard h2 {
+  font-family: var(--font-serif), Georgia, serif; font-weight: 400;
+  font-size: 28px; margin-top: 12px; line-height: 1.15;
+}
+.dircard p { color: var(--ink-soft); font-size: 15px; margin-top: 12px; }
+.dircard .go {
+  display: inline-block; margin-top: 20px; font-size: 12px;
+  letter-spacing: .16em; text-transform: uppercase; font-weight: 700;
+}
+@media (max-width: 860px) { .dircards { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
+   A — BROADSHEET.  Typographic energy. Scale contrast, hairline grids,
+   dense index rows played against very open statement blocks.
+   ========================================================================== */
+
+.dir-a .a-rule {
+  border-top: 3px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  height: 5px;
+}
+.dir-a .a-kicker {
+  font-size: 10.5px; letter-spacing: .34em; text-transform: uppercase;
+  font-weight: 700; color: var(--accent);
+}
+.dir-a .a-giant {
+  font-family: var(--font-serif), Georgia, serif; font-weight: 400;
+  font-size: clamp(38px, 8vw, 116px); line-height: .96;
+  letter-spacing: -.012em; margin-top: 16px;
+}
+.dir-a .a-giant em { font-style: italic; }
+
+.dir-a .a-essays { padding: clamp(70px, 9vw, 130px) 0 0; }
+.dir-a .a-masthead { padding-bottom: clamp(40px, 5vw, 70px); }
+.dir-a .a-standfirst {
+  font-family: var(--font-body), Georgia, serif;
+  font-size: clamp(16px, 1.4vw, 19px); color: var(--ink-soft);
+  margin-top: 26px; max-width: 42ch;
+}
+
+.dir-a .a-lane { border-top: 2px solid var(--ink); padding-top: 22px; margin-top: 54px; }
+.dir-a .a-lane-head {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: baseline;
+  padding-bottom: 20px;
+}
+.dir-a .a-lane-head h3 {
+  font-family: var(--font-sans), sans-serif; font-weight: 700;
+  font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+}
+.dir-a .a-lane-head p { color: var(--ink-soft); font-size: 14.5px; max-width: 44ch; }
+
+.dir-a .a-index { list-style: none; }
+.dir-a .a-index li { border-top: 1px solid var(--hairline); }
+.dir-a .a-index a {
+  display: grid; grid-template-columns: 78px 1fr 140px;
+  gap: 26px; align-items: start;
+  padding: 26px 0; text-decoration: none;
+  transition: background .2s ease;
+}
+.dir-a .a-index a:hover { background: color-mix(in srgb, var(--tint) 55%, transparent); }
+.dir-a .a-num {
+  font-family: var(--font-serif), Georgia, serif; font-size: 34px;
+  line-height: .9; color: var(--accent);
+}
+.dir-a .a-title {
+  display: block; font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(21px, 2.5vw, 32px); line-height: 1.16; letter-spacing: -.005em;
+}
+.dir-a .a-excerpt {
+  display: block; margin-top: 10px; max-width: 62ch;
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 15px; line-height: 1.72; color: var(--ink-soft);
+}
+.dir-a .a-date {
+  font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink-soft); font-weight: 600; text-align: right; padding-top: 8px;
+}
+
+.dir-a .a-quote {
+  background: var(--espresso); color: var(--on-deep);
+  padding: clamp(90px, 13vw, 180px) 0;
+  margin-top: clamp(70px, 9vw, 120px);
+}
+.dir-a .a-quote-mark {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(80px, 12vw, 180px); line-height: .6;
+  color: var(--accent); opacity: .55;
+}
+.dir-a .a-statement {
+  font-size: clamp(34px, 7vw, 104px); line-height: 1.02;
+  letter-spacing: -.014em; margin-top: 22px;
+}
+.dir-a .a-attrib {
+  margin-top: 40px; font-size: 11px; letter-spacing: .3em;
+  text-transform: uppercase; color: var(--on-deep-soft); font-weight: 700;
+}
+
+.dir-a .a-media { padding: clamp(70px, 9vw, 120px) 0 0; }
+.dir-a .a-plate { overflow: hidden; }
+.dir-a .a-plate img { width: 100%; height: auto; display: block; }
+.dir-a .a-caption-row {
+  display: grid; grid-template-columns: 200px 1fr; gap: 30px;
+  padding-top: 26px; border-top: 1px solid var(--ink); margin-top: 26px;
+}
+.dir-a .a-caption-lede {
+  font-family: var(--font-body), Georgia, serif;
+  font-size: clamp(17px, 1.7vw, 23px); line-height: 1.55; max-width: 46ch;
+}
+.dir-a .a-caption-note { color: var(--ink-soft); font-size: 14px; margin-top: 12px; }
+
+.dir-a .a-about { padding: clamp(80px, 10vw, 140px) 0; }
+.dir-a .a-about-grid { display: grid; grid-template-columns: 200px 1fr; gap: 30px; }
+.dir-a .a-about-grid .sticky { position: sticky; top: 120px; align-self: start; }
+.dir-a .a-prose { max-width: 60ch; }
+.dir-a .a-prose p {
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 17px; line-height: 1.85; margin-bottom: 22px;
+}
+.dir-a .a-dropcap::first-letter {
+  float: left; font-family: var(--font-serif), Georgia, serif;
+  font-size: 76px; line-height: .78; padding: 6px 12px 0 0; color: var(--deep);
+}
+
+.dir-a .a-closing {
+  background: var(--espresso); color: var(--on-deep);
+  padding: clamp(80px, 11vw, 150px) 0 clamp(100px, 12vw, 160px); text-align: center;
+}
+.dir-a .a-closing .btn { margin-top: 38px; }
+
+@media (max-width: 860px) {
+  .dir-a .a-lane-head { grid-template-columns: 1fr; gap: 10px; }
+  .dir-a .a-index a { grid-template-columns: 46px 1fr; gap: 16px; }
+  .dir-a .a-num { font-size: 24px; }
+  .dir-a .a-date { grid-column: 2; text-align: left; padding-top: 0; margin-top: 12px; }
+  .dir-a .a-caption-row,
+  .dir-a .a-about-grid { grid-template-columns: 1fr; gap: 16px; }
+  .dir-a .a-about-grid .sticky { position: static; }
+}
+
+/* ==========================================================================
+   B — CINEMATIC.  Media energy. Edge to edge panels, type sitting on image,
+   a horizontal rail, hard cuts between scenes.
+   ========================================================================== */
+
+.dir-b .b-kicker {
+  font-size: 10.5px; letter-spacing: .34em; text-transform: uppercase;
+  font-weight: 700; color: var(--on-deep-soft);
+}
+.dir-b .b-kicker.dark { color: var(--accent); }
+.dir-b .b-huge {
+  font-family: var(--font-serif), Georgia, serif; font-weight: 400;
+  font-size: clamp(42px, 9vw, 128px); line-height: .95; letter-spacing: -.015em;
+  margin-top: 16px;
+}
+.dir-b .b-big {
+  font-family: var(--font-serif), Georgia, serif; font-weight: 400;
+  font-size: clamp(30px, 4.4vw, 58px); line-height: 1.08; margin-top: 12px;
+}
+.dir-b .b-huge em, .dir-b .b-big em { font-style: italic; }
+
+.dir-b .b-panel {
+  position: relative; min-height: 92svh; display: flex; align-items: flex-end;
+  overflow: hidden;
+}
+.dir-b .b-panel-img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.dir-b .b-panel-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(12, 11, 10, .34) 0%, rgba(12, 11, 10, .12) 40%, rgba(12, 11, 10, .82) 100%);
+}
+.dir-b .b-panel-copy {
+  position: relative; z-index: 2; color: var(--on-deep);
+  max-width: 1280px; margin: 0 auto; width: 100%;
+  padding: 0 clamp(20px, 4vw, 48px) clamp(48px, 7vw, 90px);
+}
+.dir-b .b-panel-note {
+  margin-top: 20px; color: var(--on-deep-soft); font-size: 14px;
+  letter-spacing: .04em;
+}
+
+.dir-b .b-rail-section { padding: clamp(70px, 9vw, 120px) 0 clamp(60px, 8vw, 100px); }
+.dir-b .b-rail-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 24px; padding-bottom: 38px;
+}
+.dir-b .b-rail-hint {
+  font-size: 10.5px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--ink-soft); font-weight: 700; white-space: nowrap;
+}
+.dir-b .b-rail {
+  display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding-inline: clamp(20px, 4vw, 48px);
+  scrollbar-width: none;
+}
+.dir-b .b-rail::-webkit-scrollbar { display: none; }
+.dir-b .b-rail-end { flex: 0 0 clamp(20px, 4vw, 48px); }
+.dir-b .b-card {
+  flex: 0 0 min(420px, 82vw); scroll-snap-align: start;
+  display: flex; flex-direction: column;
+  background: var(--espresso); color: var(--on-deep);
+  border-radius: 4px; padding: 32px 30px 30px; text-decoration: none;
+  min-height: 340px;
+  transition: transform .25s ease;
+}
+.dir-b .b-card:hover { transform: translateY(-5px); }
+.dir-b .b-card-lane {
+  font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
+  font-weight: 700; color: var(--accent);
+}
+.dir-b .b-card-num {
+  font-family: var(--font-serif), Georgia, serif; font-size: 42px;
+  line-height: 1; color: var(--on-deep-soft); margin-top: 14px; opacity: .5;
+}
+.dir-b .b-card-title {
+  font-family: var(--font-serif), Georgia, serif; font-size: 26px;
+  line-height: 1.16; margin-top: 14px;
+}
+.dir-b .b-card-excerpt {
+  font-family: var(--font-body), Georgia, serif; font-size: 14.5px;
+  line-height: 1.7; color: var(--on-deep-soft); margin-top: 14px;
+}
+.dir-b .b-card-date {
+  margin-top: auto; padding-top: 22px; font-size: 10.5px;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--on-deep-soft);
+  font-weight: 600;
+}
+
+.dir-b .b-quote {
+  position: relative; min-height: 100svh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; background: var(--espresso);
+}
+.dir-b .b-quote-media { position: absolute; inset: 0; }
+.dir-b .b-quote-media img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.dir-b .b-quote-veil {
+  position: absolute; inset: 0; background: rgba(10, 10, 9, .74);
+}
+.dir-b .b-quote-words {
+  position: relative; z-index: 2; color: var(--on-deep);
+  font-family: var(--font-serif), Georgia, serif; font-weight: 400;
+  font-size: clamp(34px, 6.6vw, 96px); line-height: 1.06;
+  letter-spacing: -.014em; text-align: center;
+  max-width: 15ch; padding-inline: 24px;
+}
+
+.dir-b .b-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 100svh; }
+.dir-b .b-split-media { position: relative; overflow: hidden; }
+.dir-b .b-split-media img { width: 100%; height: 100%; object-fit: cover; }
+.dir-b .b-split-copy {
+  background: var(--espresso); color: var(--on-deep);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(48px, 6vw, 92px);
+}
+.dir-b .b-split-copy p {
+  font-family: var(--font-body), Georgia, serif;
+  color: var(--on-deep-soft); margin-top: 22px; max-width: 46ch;
+  font-size: 16px; line-height: 1.75;
+}
+.dir-b .b-split-copy .btn { margin-top: 34px; align-self: flex-start; }
+
+.dir-b .b-cta {
+  background: var(--olive); color: var(--on-olive);
+  padding: clamp(80px, 11vw, 150px) 0 clamp(100px, 12vw, 160px); text-align: center;
+}
+.dir-b .b-cta .btn { margin-top: 38px; }
+
+@media (max-width: 900px) {
+  .dir-b .b-split { grid-template-columns: 1fr; min-height: 0; }
+  .dir-b .b-split-media { aspect-ratio: 4 / 5; }
+  .dir-b .b-rail-head { flex-direction: column; align-items: flex-start; }
+  .dir-b .b-panel { min-height: 78svh; }
+}
+
+/* ==========================================================================
+   C — LAYERED.  Compositional energy. Ghost numerals, offset rows, images
+   that break the grid and cross the seam between colour blocks.
+   ========================================================================== */
+
+.dir-c .c-kicker {
+  font-size: 10.5px; letter-spacing: .34em; text-transform: uppercase;
+  font-weight: 700; color: var(--accent);
+}
+.dir-c .c-kicker.light { color: var(--on-deep-soft); }
+.dir-c .c-big {
+  font-family: var(--font-serif), Georgia, serif; font-weight: 400;
+  font-size: clamp(36px, 6.4vw, 94px); line-height: 1; letter-spacing: -.012em;
+  margin-top: 14px;
+}
+.dir-c .c-mid {
+  font-family: var(--font-serif), Georgia, serif; font-weight: 400;
+  font-size: clamp(26px, 3.4vw, 44px); line-height: 1.12; margin-top: 14px;
+}
+.dir-c .c-big em, .dir-c .c-mid em { font-style: italic; }
+
+.dir-c .c-essays { padding: clamp(70px, 9vw, 130px) 0 clamp(60px, 8vw, 110px); }
+.dir-c .c-head { padding-bottom: clamp(40px, 5vw, 76px); }
+.dir-c .c-lane { margin-top: 56px; }
+.dir-c .c-lane.shift { padding-left: clamp(0px, 8vw, 130px); }
+.dir-c .c-lane-label {
+  font-family: var(--font-sans), sans-serif; font-weight: 700;
+  font-size: 11.5px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-bottom: 18px; border-bottom: 1px solid var(--hairline);
+}
+.dir-c .c-row {
+  position: relative; display: block; text-decoration: none;
+  padding: 40px 0 34px; border-bottom: 1px solid var(--hairline);
+}
+.dir-c .c-row.offset { padding-left: clamp(0px, 9vw, 150px); }
+/* the numeral gets its own lane so it reads as a numeral, not a smudge */
+.dir-c .c-ghost {
+  position: absolute; left: 0; top: 24px; z-index: 0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(66px, 9vw, 132px); line-height: .78;
+  color: var(--accent); opacity: .32; pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+.dir-c .c-row:hover .c-ghost { opacity: .55; transform: translateY(-4px); }
+.dir-c .c-row.offset .c-ghost { left: clamp(0px, 9vw, 150px); }
+.dir-c .c-row-body {
+  position: relative; z-index: 1; display: block;
+  padding-left: clamp(72px, 11vw, 176px);
+}
+.dir-c .c-row-title {
+  display: block; font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(24px, 3.2vw, 42px); line-height: 1.12; letter-spacing: -.008em;
+  transition: color .2s ease;
+}
+.dir-c .c-row:hover .c-row-title { color: var(--accent); }
+.dir-c .c-row-excerpt {
+  display: block; margin-top: 14px; max-width: 56ch;
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 15px; line-height: 1.75; color: var(--ink-soft);
+}
+.dir-c .c-row-date {
+  display: block; margin-top: 16px; font-size: 10.5px;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600;
+}
+
+/* the seam: a cream band sits over the ink block and the image straddles it,
+   so the photo crosses a colour boundary instead of sitting inside a box */
+.dir-c .c-seam {
+  position: relative; background: var(--espresso);
+  padding-bottom: clamp(70px, 9vw, 130px);
+}
+.dir-c .c-seam::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0;
+  height: clamp(150px, 20vw, 300px); background: var(--ground);
+}
+.dir-c .c-seam-inner {
+  position: relative;
+  display: grid; grid-template-columns: 1.05fr 1fr;
+  gap: clamp(28px, 4.5vw, 70px); align-items: end;
+  padding-top: clamp(56px, 7vw, 110px);
+}
+.dir-c .c-seam-fig { aspect-ratio: 1 / 1; }
+.dir-c .c-seam-copy { color: var(--on-deep); padding-bottom: clamp(16px, 3vw, 46px); }
+.dir-c .c-seam-note { color: var(--on-deep-soft); font-size: 14px; margin-top: 16px; }
+
+.dir-c .c-quote { background: var(--espresso); color: var(--on-deep); padding: clamp(90px, 12vw, 170px) 0; }
+.dir-c .c-quote-grid {
+  display: grid; grid-template-columns: .8fr 1.2fr;
+  gap: clamp(24px, 4vw, 64px); align-items: center;
+}
+.dir-c .c-quote-plate { aspect-ratio: 3 / 4; }
+.dir-c .c-statement {
+  font-size: clamp(30px, 5.4vw, 76px); line-height: 1.04; letter-spacing: -.014em;
+}
+.dir-c .c-attrib {
+  grid-column: 2; margin-top: 30px; font-size: 11px; letter-spacing: .3em;
+  text-transform: uppercase; color: var(--on-deep-soft); font-weight: 700;
+}
+
+.dir-c .c-about { padding: clamp(80px, 11vw, 150px) 0; }
+.dir-c .c-about-grid {
+  display: grid; grid-template-columns: .72fr 1.28fr;
+  gap: clamp(28px, 5vw, 74px); align-items: center;
+}
+.dir-c .c-about-fig { aspect-ratio: 4 / 5; margin-top: clamp(-60px, -5vw, 0px); }
+.dir-c .c-about-copy p {
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 16.5px; line-height: 1.8; color: var(--ink-soft);
+  margin-top: 22px; max-width: 54ch;
+}
+
+.dir-c .c-closing {
+  background: var(--olive); color: var(--on-olive);
+  padding: clamp(80px, 11vw, 150px) 0 clamp(100px, 12vw, 160px); text-align: center;
+}
+.dir-c .c-closing .btn { margin-top: 38px; }
+
+@media (max-width: 900px) {
+  .dir-c .c-lane.shift { padding-left: 0; }
+  .dir-c .c-row.offset { padding-left: 0; }
+  .dir-c .c-seam-inner { grid-template-columns: 1fr; gap: 26px; padding-top: 44px; }
+  .dir-c .c-seam::before { height: clamp(90px, 22vw, 150px); }
+  .dir-c .c-seam-copy { padding-bottom: 0; }
+  .dir-c .c-row-body { padding-left: 0; }
+  .dir-c .c-ghost { position: static; display: block; font-size: 54px; opacity: .4; margin-bottom: 6px; }
+  .dir-c .c-quote-grid,
+  .dir-c .c-about-grid { grid-template-columns: 1fr; }
+  .dir-c .c-attrib { grid-column: 1; }
+  .dir-c .c-quote-plate { max-width: 320px; }
+  .dir-c .c-about-fig { margin-top: 0; max-width: 340px; }
+}
