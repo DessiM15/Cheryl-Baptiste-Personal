@@ -37,22 +37,22 @@ export default function ScrollFx() {
     const ctx = gsap.context(() => {
       const isMobile = window.innerWidth < 760;
 
-      // hero media slow zoom + content drift as you leave the hero
-      const heroMedia = document.querySelector(".hero-scene .hero-media");
-      if (heroMedia) {
-        gsap.to(heroMedia, {
-          scale: 1.14,
+      // hero copy drifts up and out while the portrait plate holds a beat longer
+      const heroCopy = document.querySelectorAll(".hero-sig, .hero-copy");
+      if (heroCopy.length) {
+        gsap.to(heroCopy, {
+          yPercent: -12,
+          autoAlpha: 0.25,
           ease: "none",
-          scrollTrigger: { trigger: ".hero-scene", start: "top top", end: "bottom top", scrub: true },
+          scrollTrigger: { trigger: ".hero-split", start: "top top", end: "88% top", scrub: true },
         });
       }
-      const heroStage = document.querySelectorAll(".hero-stage, .hero-foot, .hero-cameo");
-      if (heroStage.length) {
-        gsap.to(heroStage, {
-          yPercent: -10,
-          autoAlpha: 0.2,
+      const heroPlate = document.querySelector(".hero-plate");
+      if (heroPlate) {
+        gsap.to(heroPlate, {
+          yPercent: -5,
           ease: "none",
-          scrollTrigger: { trigger: ".hero-scene", start: "top top", end: "88% top", scrub: true },
+          scrollTrigger: { trigger: ".hero-split", start: "top top", end: "bottom top", scrub: true },
         });
       }
 

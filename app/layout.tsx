@@ -3,7 +3,6 @@ import { Playfair_Display, Libre_Baskerville, Mulish, Ephesis, Allison } from "n
 import "./globals.css";
 import CameoIntro from "@/components/CameoIntro";
 import CameoLockup from "@/components/CameoLockup";
-import PalettePill from "@/components/PalettePill";
 import SiteHeader from "@/components/SiteHeader";
 
 const serif = Playfair_Display({
@@ -63,7 +62,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#3B2C21",
+  themeColor: "#F4F1EA",
   width: "device-width",
   initialScale: 1,
 };
@@ -90,7 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var p=localStorage.getItem("palette");if(p)document.documentElement.dataset.palette=p;if(sessionStorage.getItem("cb-intro"))document.documentElement.dataset.intro="done";}catch(e){}`,
+            __html: `try{if(sessionStorage.getItem("cb-intro"))document.documentElement.dataset.intro="done";}catch(e){}`,
           }}
         />
         <script
@@ -140,8 +139,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </p>
           </div>
         </footer>
-
-        <PalettePill />
       </body>
     </html>
   );
