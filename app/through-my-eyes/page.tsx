@@ -1,80 +1,63 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import ScrollFx from "@/components/ScrollFx";
+import GalleryGrid, { type Shot } from "@/components/GalleryGrid";
 
 export const metadata: Metadata = {
   title: "Through my eyes",
   description:
-    "Places the work has taken Cheryl Baptiste: panels, boardrooms, and conference floors, in her own snapshots.",
+    "Places the work has taken Cheryl Baptiste: panels, boardrooms, studios, and conference floors, in her own snapshots.",
 };
 
-type Shot = {
-  src: string;
-  caption: string;
-  place: string;
-  w: number;
-  h: number;
-  arch?: boolean;
-  span?: string;
-};
-
+// Every tile is a square cut from the original photo, not from an earlier crop.
+// Order alternates bright and dark so the grid has a rhythm. The on stage shot
+// sits last on purpose: the panel above the grid is the same photograph, so
+// opening with it read as a repeat.
 const SHOTS: Shot[] = [
   {
-    src: "/img/gallery/g-ai-panel.jpg",
-    place: "On stage",
-    caption: "A panel on HR leadership in the age of AI",
-    w: 1400,
-    h: 1050,
-    arch: true,
-    span: "tall",
+    src: "/img/gallery/g-lv-monitor.jpg",
+    place: "The Leadership Voice",
+    caption: "Behind the camera",
   },
   {
     src: "/img/gallery/g-ucla.jpg",
     place: "UCLA Anderson School of Business",
     caption: "DEI panel, in conversation",
-    w: 1400,
-    h: 1050,
-    span: "wide",
   },
   {
     src: "/img/gallery/g-vivatech.jpg",
     place: "VivaTech · Paris",
     caption: "2025",
-    w: 1400,
-    h: 1867,
-    arch: true,
-    span: "tall",
   },
   {
     src: "/img/gallery/g-mcf-2.jpg",
     place: "MCF strategy meeting",
     caption: "The team",
-    w: 1400,
-    h: 1050,
-    span: "wide",
   },
   {
     src: "/img/gallery/g-conference.jpg",
     place: "On the conference floor",
     caption: "Between sessions",
-    w: 1400,
-    h: 1050,
-  },
-  {
-    src: "/img/gallery/g-mcf-1.jpg",
-    place: "MCF strategy meeting",
-    caption: "An evening with the women in the work",
-    w: 1400,
-    h: 1050,
   },
   {
     src: "/img/gallery/g-dei-detail.jpg",
     place: "DEI panel",
     caption: "Backstage",
-    w: 1400,
-    h: 1867,
-    arch: true,
-    span: "tall",
+  },
+  {
+    src: "/img/gallery/g-desk.jpg",
+    place: "Between the rooms",
+    caption: "Most of the work looks like this",
+  },
+  {
+    src: "/img/gallery/g-mcf-1.jpg",
+    place: "MCF strategy meeting",
+    caption: "An evening with the women in the work",
+  },
+  {
+    src: "/img/gallery/g-ai-panel.jpg",
+    place: "On stage",
+    caption: "A panel on HR leadership in the age of AI",
   },
 ];
 
@@ -107,26 +90,8 @@ export default function ThroughMyEyes() {
       </section>
 
       <section className="gallery-grid-wrap">
-        <div className="wrap">
-          <div className="gallery-grid">
-            {SHOTS.map((s) => (
-              <figure key={s.src} className={`shot${s.span ? ` ${s.span}` : ""} gs-reveal`}>
-                <div className={s.arch ? "arch-frame" : "shot-frame"}>
-                  <Image
-                    src={s.src}
-                    alt={`${s.place}: ${s.caption}`}
-                    width={s.w}
-                    height={s.h}
-                    sizes="(max-width: 700px) 92vw, 44vw"
-                  />
-                </div>
-                <figcaption>
-                  <span className="place">{s.place}</span>
-                  <span className="cap">{s.caption}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+        <div className="wrap-wide">
+          <GalleryGrid shots={SHOTS} />
         </div>
       </section>
 

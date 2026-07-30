@@ -514,34 +514,133 @@ section { padding-block: clamp(64px, 10vh, 120px); }
 .talk-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .media-secondary { margin-top: clamp(56px, 9vh, 90px); padding-top: clamp(40px, 6vh, 64px); border-top: 1px solid rgba(244, 237, 226, .12); }
 
-/* ================= gallery · through my eyes ================= */
+/* ================= gallery · through my eyes =================
+   Uniform squares, nothing on the photo at rest. On hover the image pushes in
+   and a frosted bar rises from the bottom edge carrying the caption. Touch has
+   no hover, so there the bar simply rests on every tile.
+   ============================================================ */
 .gallery-page { background: var(--ground); }
-.gallery-head { padding: 150px 0 30px; }
-.gallery-head .display { margin-top: 6px; }
-.gallery-grid-wrap { padding-top: 20px; }
-.gallery-grid {
-  display: grid; grid-template-columns: repeat(6, 1fr);
-  gap: clamp(20px, 3vw, 44px); align-items: start;
+.gallery-grid-wrap { padding-top: clamp(50px, 7vw, 86px); padding-bottom: clamp(20px, 4vw, 40px); }
+
+.gal-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 1.8vw, 26px);
 }
-.shot { grid-column: span 2; margin: 0; }
-.shot.wide { grid-column: span 4; }
-.shot.tall { grid-column: span 2; }
-@media (max-width: 880px) {
-  .shot, .shot.wide, .shot.tall { grid-column: span 3; }
+@media (max-width: 880px) { .gal-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .gal-grid { grid-template-columns: 1fr; } }
+
+.gshot {
+  position: relative; display: block; overflow: hidden;
+  aspect-ratio: 1 / 1; width: 100%;
+  margin: 0; padding: 0; border: 0; border-radius: 3px;
+  background: var(--tint); color: inherit; font: inherit;
+  cursor: zoom-in; isolation: isolate;
 }
-@media (max-width: 560px) {
-  .shot, .shot.wide, .shot.tall { grid-column: span 6; }
+.gshot img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .9s cubic-bezier(.2, .6, .2, 1);
 }
-.shot-frame { overflow: hidden; border-radius: 6px; }
-.shot .arch-frame img, .shot .shot-frame img { width: 100%; height: auto; }
-.shot:nth-child(odd) { transform: translateY(clamp(0px, 3vw, 34px)); }
-.shot figcaption { display: flex; flex-direction: column; gap: 2px; margin-top: 14px; }
-.shot .place {
-  font-size: 11px; letter-spacing: .24em; text-transform: uppercase;
-  color: var(--deep); font-weight: 700;
+.gshot:hover img, .gshot:focus-visible img { transform: scale(1.045); }
+/* a scrim under the glass so the caption holds over the bright photos */
+.gshot::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 46%;
+  background: linear-gradient(180deg, rgba(10, 10, 9, 0) 0%, rgba(10, 10, 9, .5) 100%);
+  opacity: 0; transition: opacity .5s ease; pointer-events: none;
 }
-.shot .cap { font-family: var(--font-script), cursive; font-size: 24px; color: var(--accent); line-height: 1.2; }
-.gallery-close { text-align: center; padding-block: clamp(80px, 12vh, 130px); }
+.gshot:hover::after, .gshot:focus-visible::after { opacity: 1; }
+.gshot::before {
+  content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(20, 18, 16, .12); border-radius: 3px;
+}
+.gshot:focus-visible { outline: 2px solid var(--deep); outline-offset: 3px; }
+
+.gcap {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  display: block; text-align: left;
+  padding: 15px clamp(14px, 1.5vw, 20px) 16px;
+  background: rgba(14, 13, 12, .40);
+  backdrop-filter: blur(16px) saturate(135%);
+  -webkit-backdrop-filter: blur(16px) saturate(135%);
+  border-top: 1px solid rgba(255, 255, 255, .16);
+  transform: translateY(101%);
+  transition: transform .55s cubic-bezier(.2, .6, .2, 1);
+}
+.gshot:hover .gcap, .gshot:focus-visible .gcap { transform: none; }
+.gcap .place {
+  display: block; font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase;
+  font-weight: 700; color: var(--on-deep); opacity: .78;
+}
+.gcap .cap {
+  display: block; margin-top: 5px;
+  font-family: var(--font-body), Georgia, serif; font-style: italic;
+  font-size: 14px; line-height: 1.4; color: var(--on-deep);
+}
+/* no hover to reveal with, so let it rest open */
+@media (hover: none) {
+  .gcap { transform: none; }
+  .gshot::after { opacity: 1; }
+  .gshot { cursor: pointer; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gshot img, .gcap, .gshot::after { transition: none; }
+  .gcap { transform: none; }
+  .gshot::after { opacity: 1; }
+  .gshot:hover img, .gshot:focus-visible img { transform: none; }
+}
+
+/* ---------- lightbox ---------- */
+.lb {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(56px, 7vh, 90px) clamp(14px, 5vw, 80px);
+  background: rgba(9, 9, 8, .95);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  animation: lbIn .3s ease both;
+}
+@keyframes lbIn { from { opacity: 0; } to { opacity: 1; } }
+.lb-fig { margin: 0; display: flex; flex-direction: column; align-items: center; }
+.lb-fig img {
+  width: auto; max-width: min(1000px, 100%); max-height: 72svh;
+  height: auto; object-fit: contain; border-radius: 3px;
+  box-shadow: 0 50px 90px -40px rgba(0, 0, 0, .9);
+}
+.lb-cap { margin-top: 20px; text-align: center; }
+.lb-cap .place {
+  display: block; font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+  font-weight: 700; color: var(--on-deep-soft);
+}
+.lb-cap .cap {
+  display: block; margin-top: 8px;
+  font-family: var(--font-serif), Georgia, serif; font-size: clamp(17px, 2.2vw, 25px);
+  line-height: 1.3; color: var(--on-deep);
+}
+.lb-cap .count {
+  display: block; margin-top: 14px; font-size: 10.5px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--on-deep-soft); opacity: .7;
+}
+.lb-btn {
+  position: absolute; z-index: 2; cursor: pointer;
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .18);
+  color: var(--on-deep); border-radius: 999px;
+  width: 46px; height: 46px; font-size: 20px; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s ease, border-color .2s ease;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.lb-btn:hover { background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .4); }
+.lb-btn:focus-visible { outline: 2px solid var(--on-deep); outline-offset: 2px; }
+.lb-close { top: clamp(14px, 3vh, 28px); right: clamp(14px, 3vw, 32px); font-size: 15px; }
+.lb-prev { left: clamp(10px, 2.4vw, 30px); top: 50%; transform: translateY(-50%); font-size: 26px; }
+.lb-next { right: clamp(10px, 2.4vw, 30px); top: 50%; transform: translateY(-50%); font-size: 26px; }
+@media (max-width: 620px) {
+  .lb-prev { left: 12px; }
+  .lb-next { right: 12px; }
+  .lb-btn { width: 40px; height: 40px; }
+  .lb-fig img { max-height: 60svh; }
+}
+@media (prefers-reduced-motion: reduce) { .lb { animation: none; } }
+
 .gallery-close .btn { margin-top: 20px; }
 
 /* ==========================================================================
