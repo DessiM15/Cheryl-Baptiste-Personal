@@ -543,3 +543,239 @@ section { padding-block: clamp(64px, 10vh, 120px); }
 .shot .cap { font-family: var(--font-script), cursive; font-size: 24px; color: var(--accent); line-height: 1.2; }
 .gallery-close { text-align: center; padding-block: clamp(80px, 12vh, 130px); }
 .gallery-close .btn { margin-top: 20px; }
+
+/* ==========================================================================
+   CINEMATIC — direction B, folded in as the real site (July 29, 2026).
+   Was scoped under .dirpage in app/directions/directions.css, which is gone.
+   Edge to edge panels, type sitting on image, a horizontal rail, hard cuts.
+   ========================================================================== */
+
+/* main is already full width, so a bleed section only has to skip the wrap.
+   Do NOT reach for width:100vw here, it overflows by the scrollbar width. */
+.bleed { width: 100%; }
+/* the global `section { padding-block }` was putting a cream stripe between
+   every full bleed panel, which fights the hard cuts this direction is built
+   on. Panels carry their own internal padding, so zero it out here. */
+.b-panel, .b-quote, .b-split { padding-block: 0; }
+.wrap-wide {
+  max-width: 1280px; margin: 0 auto;
+  padding-inline: clamp(20px, 4vw, 48px);
+}
+
+.b-kicker {
+  font-size: 10.5px; letter-spacing: .34em; text-transform: uppercase;
+  font-weight: 700; color: var(--on-deep-soft);
+}
+.b-kicker.dark { color: var(--accent); }
+.b-huge {
+  font-family: var(--font-serif), Georgia, serif; font-weight: 400;
+  font-size: clamp(42px, 9vw, 128px); line-height: .95; letter-spacing: -.015em;
+  margin-top: 16px;
+}
+.b-big {
+  font-family: var(--font-serif), Georgia, serif; font-weight: 400;
+  font-size: clamp(30px, 4.4vw, 58px); line-height: 1.08; margin-top: 12px;
+}
+.b-huge em, .b-big em { font-style: italic; }
+
+/* ---------- full bleed panel ---------- */
+.b-panel {
+  position: relative; min-height: 92svh; display: flex; align-items: flex-end;
+  overflow: hidden;
+}
+.b-panel-img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.b-panel-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(12, 11, 10, .34) 0%, rgba(12, 11, 10, .12) 40%, rgba(12, 11, 10, .82) 100%);
+}
+.b-panel-copy {
+  position: relative; z-index: 2; color: var(--on-deep);
+  max-width: 1280px; margin: 0 auto; width: 100%;
+  padding: 0 clamp(20px, 4vw, 48px) clamp(48px, 7vw, 90px);
+}
+.b-panel-note {
+  margin-top: 20px; color: var(--on-deep-soft); font-size: 14px;
+  letter-spacing: .04em;
+}
+
+/* ---------- horizontal essay rail ---------- */
+.b-rail-section { padding: clamp(70px, 9vw, 120px) 0 clamp(60px, 8vw, 100px); }
+.b-rail-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 24px; padding-bottom: 38px;
+}
+.b-rail-sub {
+  color: var(--ink-soft); margin-top: 20px; max-width: 46ch;
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 15.5px; line-height: 1.75;
+}
+.b-rail-hint {
+  font-size: 10.5px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--ink-soft); font-weight: 700; white-space: nowrap;
+}
+.b-rail {
+  display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding-inline: clamp(20px, 4vw, 48px);
+  scrollbar-width: none;
+}
+.b-rail::-webkit-scrollbar { display: none; }
+.b-rail-end { flex: 0 0 clamp(20px, 4vw, 48px); }
+.b-card {
+  flex: 0 0 min(420px, 82vw); scroll-snap-align: start;
+  display: flex; flex-direction: column;
+  background: var(--espresso); color: var(--on-deep);
+  border-radius: 4px; padding: 32px 30px 30px; text-decoration: none;
+  min-height: 340px;
+  transition: transform .25s ease;
+}
+.b-card:hover { transform: translateY(-5px); }
+.b-card-lane {
+  font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
+  font-weight: 700; color: var(--accent);
+}
+.b-card-num {
+  font-family: var(--font-serif), Georgia, serif; font-size: 42px;
+  line-height: 1; color: var(--on-deep-soft); margin-top: 14px; opacity: .5;
+}
+.b-card-title {
+  font-family: var(--font-serif), Georgia, serif; font-size: 26px;
+  line-height: 1.16; margin-top: 14px;
+}
+.b-card-excerpt {
+  font-family: var(--font-body), Georgia, serif; font-size: 14.5px;
+  line-height: 1.7; color: var(--on-deep-soft); margin-top: 14px;
+}
+.b-card-date {
+  margin-top: auto; padding-top: 22px; font-size: 10.5px;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--on-deep-soft);
+  font-weight: 600;
+}
+
+/* ---------- pinned quote over the talk footage ---------- */
+.b-quote {
+  position: relative; min-height: 100svh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; background: var(--espresso);
+}
+.b-quote-media { position: absolute; inset: 0; }
+.b-quote-media video,
+.b-quote-media img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+/* the source is a 860px square crop, so it is soft at full width. The slow
+   push plus the vignette below is what makes it read as texture, not footage. */
+.b-quote-video { animation: quoteDrift 30s ease-in-out infinite alternate; }
+@keyframes quoteDrift {
+  from { transform: scale(1.01); }
+  to { transform: scale(1.07); }
+}
+.b-quote-still { display: none; }
+/* vignette, not a flat veil: holds the middle at the .74 she signed off on
+   and lets the corners fall away so the type has somewhere to sit */
+.b-quote-veil {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 92% at 50% 50%, rgba(9, 9, 8, .62) 0%, rgba(9, 9, 8, .88) 100%),
+    rgba(9, 9, 8, .30);
+}
+.b-quote-words {
+  position: relative; z-index: 2; color: var(--on-deep);
+  font-family: var(--font-serif), Georgia, serif; font-weight: 400;
+  font-size: clamp(34px, 6.6vw, 96px); line-height: 1.06;
+  letter-spacing: -.014em; text-align: center;
+  max-width: 15ch; padding-inline: 24px;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, .55);
+}
+/* no autoplaying footage on phones or for anyone who asked for less motion */
+@media (max-width: 900px) {
+  .b-quote-video { display: none; }
+  .b-quote-still { display: block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .b-quote-video { display: none; animation: none; }
+  .b-quote-still { display: block; }
+}
+
+/* ---------- split: image holds one half edge to edge ---------- */
+.b-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 100svh; }
+.b-split-media { position: relative; overflow: hidden; }
+.b-split-media img { width: 100%; height: 100%; object-fit: cover; }
+.b-split-copy {
+  background: var(--espresso); color: var(--on-deep);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(48px, 6vw, 92px);
+}
+.b-split-copy p {
+  font-family: var(--font-body), Georgia, serif;
+  color: var(--on-deep-soft); margin-top: 22px; max-width: 46ch;
+  font-size: 16px; line-height: 1.75;
+}
+.b-split-copy .btn { margin-top: 34px; align-self: flex-start; }
+
+/* ---------- closing panel ---------- */
+.b-cta {
+  background: var(--olive); color: var(--on-olive);
+  padding: clamp(80px, 11vw, 150px) 0 clamp(100px, 12vw, 160px); text-align: center;
+}
+.b-cta .script-note { color: var(--on-olive-soft); }
+.b-cta .btn { margin-top: 38px; }
+
+@media (max-width: 900px) {
+  .b-split { grid-template-columns: 1fr; min-height: 0; }
+  .b-split-media { aspect-ratio: 4 / 5; }
+  .b-rail-head { flex-direction: column; align-items: flex-start; }
+  .b-panel { min-height: 78svh; }
+}
+
+/* ================= media page ================= */
+.media-page { background: var(--ground); }
+.mp-head { padding: 150px 0 clamp(38px, 5vw, 64px); }
+.mp-head .b-big { max-width: 18ch; }
+.mp-feature {
+  background: var(--espresso); color: var(--on-deep);
+  padding: clamp(60px, 8vw, 110px) 0;
+}
+.mp-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(30px, 5vw, 64px); align-items: center;
+}
+.mp-note {
+  font-family: var(--font-body), Georgia, serif;
+  color: var(--on-deep-soft); margin-top: 20px; max-width: 46ch;
+  font-size: 15.5px; line-height: 1.75;
+}
+.mp-player {
+  border-radius: 4px; overflow: hidden; background: #000;
+  box-shadow: 0 34px 74px -34px rgba(0, 0, 0, .7);
+}
+.mp-player video { width: 100%; height: auto; display: block; }
+.mp-second { padding: clamp(60px, 8vw, 110px) 0; }
+.mp-second-cta { margin-left: 12px; }
+@media (max-width: 900px) {
+  .mp-grid { grid-template-columns: 1fr; }
+  .mp-second-cta { margin-left: 0; margin-top: 12px; }
+}
+
+/* ================= gallery page, cinematic opening ================= */
+.gallery-panel { min-height: 72svh; }
+.gallery-panel .b-huge { font-size: clamp(38px, 7.4vw, 104px); }
+/* panel.jpg is a 4:3 stage shot dropped into a wide strip, so cover keeps only
+   the middle band. Bias up for her face, and carry a heavier veil because the
+   backdrop behind her is near white where the headline sits. */
+.gallery-panel .b-panel-img { object-position: 50% 22%; }
+.gallery-panel .b-panel-veil {
+  background: linear-gradient(180deg, rgba(12, 11, 10, .50) 0%, rgba(12, 11, 10, .44) 30%, rgba(12, 11, 10, .90) 100%);
+}
+.gallery-panel .b-panel-copy { text-shadow: 0 2px 24px rgba(0, 0, 0, .5); }
+.gallery-close .b-huge { font-size: clamp(30px, 5.4vw, 76px); max-width: 20ch; margin-inline: auto; }
+.gallery-grid-wrap { padding-top: clamp(50px, 7vw, 86px); }
+
+/* ================= footer note ================= */
+.footer-note {
+  margin-top: 30px; font-family: var(--font-body), Georgia, serif;
+  font-size: 14.5px; line-height: 1.7; color: var(--ink-soft); max-width: 52ch;
+}
+.footer-note a { font-weight: 700; color: var(--deep); text-decoration: none; }
+.footer-note a:hover { text-decoration: underline; }

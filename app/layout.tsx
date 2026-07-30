@@ -111,7 +111,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </a>
               <nav aria-label="Footer">
                 <a href="/#essays">Essays</a>
-                <a href="/#media">Media</a>
+                <a href="/media">Media</a>
                 <a href="/through-my-eyes">Through my eyes</a>
                 <a href="/#about">About</a>
                 <a
@@ -133,6 +133,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </a>
               </nav>
             </div>
+            <p className="footer-note">
+              The essays live here. The organizational work has a firm of its own,{" "}
+              <a href="https://fgtsco.com" target="_blank" rel="noopener noreferrer">
+                FGT Solutions
+              </a>
+              .
+            </p>
             <p className="fineprint">
               © {new Date().getFullYear()} Cheryl Baptiste · California · Essays on work,
               leadership, and the truth in between.

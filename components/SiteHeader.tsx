@@ -35,7 +35,7 @@ export default function SiteHeader() {
       <div className="bar">
         <nav className="side left" aria-label="Primary left">
           <a href="/#essays">Essays</a>
-          <a href="/#media">Media</a>
+          <a href="/media">Media</a>
           <a href="/through-my-eyes">Gallery</a>
         </nav>
 
@@ -64,7 +64,7 @@ export default function SiteHeader() {
         <CameoLockup size={64} onDark spin />
         <div style={{ height: 18 }} />
         <a className="item" href="/#essays" onClick={close}>Essays</a>
-        <a className="item" href="/#media" onClick={close}>Media</a>
+        <a className="item" href="/media" onClick={close}>Media</a>
         <a className="item" href="/through-my-eyes" onClick={close}>Through my eyes</a>
         <a className="item" href="/#about" onClick={close}>About</a>
         <a className="item" href="https://fgtsco.com" target="_blank" rel="noopener noreferrer" onClick={close}>

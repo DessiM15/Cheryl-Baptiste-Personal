@@ -1,234 +1,160 @@
 import Image from "next/image";
 import Hero from "@/components/Hero";
 import ScrollFx from "@/components/ScrollFx";
-import EssayIndex from "@/components/EssayIndex";
+import { ESSAYS, LANES, SUBSTACK } from "./data";
 
-const SUBSTACK = "https://substack.com/@cherylbaptiste";
-
-const ESSAYS = [
-  {
-    n: "01",
-    title: "HR Has Become a Bad Word. And We Did That to Ourselves.",
-    date: "June 22, 2026",
-    excerpt:
-      "Say you're in HR at a social event and watch what happens. There's a pause. A slight wince. Maybe a joke about watching what they say around you now. HR has become a punchline, a warning, a four-letter word dressed up in two letters. Honesty matters more to me than defensiveness about how we got here.",
-  },
-  {
-    n: "02",
-    title: "We Don't Hate Our Jobs. We Hate What Our Jobs Have Become.",
-    date: "June 15, 2026",
-    excerpt:
-      "I was on a call recently with an HR leader I deeply respect. She stepped down from a CHRO role to take a director position. Not because she failed. Somewhere in that conversation, she said it plainly: we don't hate our jobs. We hate what our jobs have become. I haven't stopped thinking about it since.",
-  },
+const QUOTE = [
+  "We", "don't", "hate", "our", "jobs.",
+  "We", "hate", "what", "our", "jobs", "have", "become.",
 ];
-
-const QUOTE_A = ["We", "don't", "hate", "our", "jobs."];
-const QUOTE_B = ["We", "hate", "what", "our", "jobs", "have", "become."];
-
-const TICKER = ["Work", "Leadership", "Identity", "Ambition", "Honesty"];
-
-function Ticker() {
-  const run = TICKER.map((w) => (
-    <span key={w} className="tick">
-      {w} <i className="tick-script">&amp;</i>
-    </span>
-  ));
-  return (
-    <div className="ticker" aria-hidden="true">
-      <div className="ticker-track">
-        {run}
-        {run}
-        {run}
-      </div>
-    </div>
-  );
-}
 
 export default function Home() {
   return (
-    <main>
+    <main className="cine">
       <ScrollFx />
       <Hero />
 
-      <Ticker />
-
-      {/* ---------- essays · cream ---------- */}
-      <section id="essays" className="block-cream essays-block">
-        <div className="wrap">
-          <div className="essays-head">
-            <div>
-              <p className="eyebrow gs-reveal">The Essays</p>
-              <h2 className="display" data-lines>
-                <span className="line"><span className="line-inner">Honest writing about work,</span></span>
-                <span className="line"><span className="line-inner">from someone <em>in the room.</em></span></span>
-              </h2>
-              <p className="sec-sub gs-reveal">
-                New essays land on Substack first. These are the ones people keep sending each other.
-              </p>
-            </div>
-            <div className="arch-frame essays-arch" data-parallax="6">
-              <Image src="/img/panel.jpg" alt="Cheryl Baptiste speaking on a panel" width={1400} height={1050} sizes="(max-width: 820px) 60vw, 320px" />
-            </div>
-          </div>
-
-          <EssayIndex essays={ESSAYS} />
-          <div className="essays-cta gs-reveal">
-            <a className="btn quiet" href={SUBSTACK} target="_blank" rel="noopener noreferrer">
-              Read all essays on Substack
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- quote · olive ---------- */}
-      <section className="block-olive quote-scene">
-        <div className="wrap quote-grid">
-          <div className="arch-frame quote-arch">
-            <video autoPlay muted loop playsInline preload="metadata" aria-label="Cheryl Baptiste, in conversation">
-              <source src="/img/cheryl-loop.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div>
-            <p className="script-note gs-reveal">the quiet part</p>
-            <blockquote className="display quote-words">
-              {QUOTE_A.map((w, i) => (
-                <span key={`a${i}`} className="w">{w}</span>
-              ))}{" "}
-              <em>
-                {QUOTE_B.map((w, i) => (
-                  <span key={`b${i}`} className="w">{w}</span>
-                ))}
-              </em>
-            </blockquote>
-            <p className="attribution gs-reveal">From the essays</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- media · espresso ---------- */}
-      <section className="block-espresso" id="media">
-        <div className="wrap media-grid">
-          <div className="gs-reveal">
-            <p className="script-note">in her own words</p>
-            <h2 className="display-sm">Leaving corporate, on her own terms.</h2>
-            <p className="on-dark-soft">
-              Cheryl on walking away from corporate HR leadership, what she watched the
-              profession become, and why she bet on herself. Candid, warm, and zero corporate
-              polish. This is what it sounds like when she is in the room.
-            </p>
-          </div>
-          <div className="talk-frame gs-reveal">
-            <video controls playsInline preload="metadata" poster="/img/cheryl-talk-poster.jpg">
-              <source src="/img/cheryl-talk.mp4" type="video/mp4" />
-            </video>
-          </div>
-        </div>
-        <div className="wrap media-grid media-secondary">
-          <div className="gs-reveal">
-            <p className="eyebrow" style={{ color: "var(--on-deep-soft)" }}>For the record</p>
-            <h2 className="display-sm">Executive of the Year, 2024.</h2>
-            <p className="on-dark-soft">
-              When Cheryl was named HR Executive of the Year during her corporate years at Murad,
-              the cameras turned to her, her team, and her boss to ask what it&apos;s like to work
-              with her. Cued to the moment her segment begins.
-            </p>
-          </div>
-          <div className="video-frame gs-reveal">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/SIgFALciS-0?start=302"
-              title="Cheryl Baptiste, HR Executive of the Year 2024"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- about · cream ---------- */}
-      <section id="about" className="block-cream">
-        <div className="wrap about-grid">
-          <div>
-            <p className="eyebrow gs-reveal">About</p>
-            <div className="about-body">
-              <p className="lead-in gs-reveal">
-                I got into this work because someone saw something in me before I saw it in
-                myself. I&apos;ve spent my career trying to be that person for others.
-              </p>
-              <p className="gs-reveal">
-                I&apos;m a grassroots, nontraditional HR leader. No formal HR training. A business
-                degree with a minor in finance, magna cum laude, a master&apos;s in education, and
-                everything else learned the real way: inside technology companies, sales floors,
-                distribution centers, property management firms, and beauty brands. What I found
-                everywhere I went is that strong leadership and sound people decisions transcend
-                industry.
-              </p>
-              <p className="gs-reveal">
-                Early in my career I decided my integrity was not for sale. Not for a title, not for
-                job security, not to make a difficult moment easier. That decision has cost me a few
-                times. I&apos;d make it again every time, because the person in the room who tells
-                the truth about what&apos;s happening, regardless of which side you&apos;re on, is
-                the person organizations actually need.
-              </p>
-              <p className="gs-reveal">
-                In 2022 I founded FGT Solutions, and in 2025 I left corporate to run it full time.
-                These days I write, I speak, and I advise leaders one on one. The essays are about
-                work, leadership, and the journey from employee to entrepreneur. The honest version.
-              </p>
-            </div>
-          </div>
-          <div className="about-side">
-            <div className="arch-frame portrait-arch" data-parallax="5">
-              <Image src="/cheryl.png" alt="Cheryl Baptiste" width={680} height={1020} sizes="(max-width: 880px) 80vw, 360px" />
-            </div>
-            <p className="script-note under-portrait" aria-hidden="true">honestly, Cheryl</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- bridge to FGT · golden coast ---------- */}
-      <section className="scene bridge">
-        <div className="media" data-parallax="10" aria-hidden="true">
-          <Image src="/img/coast-gold.jpg" alt="" fill sizes="100vw" style={{ objectFit: "cover" }} />
-        </div>
-        <div className="wrap">
-          <p className="eyebrow gs-reveal">When it&apos;s your organization</p>
-          <h2 className="display" data-lines>
-            <span className="line"><span className="line-inner">The essays live here.</span></span>
-            <span className="line"><span className="line-inner"><em>The organizational work</em></span></span>
-            <span className="line"><span className="line-inner"><em>has a firm of its own.</em></span></span>
+      {/* ---------- full bleed panel: type over media ---------- */}
+      <section className="b-panel bleed">
+        <Image
+          className="b-panel-img"
+          src="/img/lv-wide.jpg"
+          alt="Cheryl Baptiste on set at The Leadership Voice"
+          width={1800}
+          height={1013}
+          sizes="100vw"
+        />
+        <div className="b-panel-veil" aria-hidden="true" />
+        <div className="b-panel-copy">
+          <p className="b-kicker">For the record</p>
+          <h2 className="b-huge">
+            In the room,
+            <br />
+            <em>on the record.</em>
           </h2>
-          <div className="bridge-row gs-reveal">
-            <p>
-              This site is where I write, speak, and advise. When an organization needs more than
-              words, my firm, FGT Solutions, partners with founders and senior leaders to name
-              what&apos;s happening and fix it.
-            </p>
-            <a className="btn on-dark" href="https://fgtsco.com" target="_blank" rel="noopener noreferrer">
-              Visit FGT Solutions
-            </a>
-          </div>
+          <p className="b-panel-note">On set at The Leadership Voice.</p>
         </div>
       </section>
 
-      {/* ---------- closing · espresso ---------- */}
-      <section className="block-espresso closing">
-        <div className="wrap">
-          <p className="script-note big gs-reveal">don&apos;t miss an essay</p>
-          <h2 className="display" data-lines>
-            <span className="line"><span className="line-inner">The conversation is too</span></span>
-            <span className="line"><span className="line-inner"><em>important to have alone.</em></span></span>
+      {/* ---------- horizontal essay rail ---------- */}
+      <section id="essays" className="b-rail-section">
+        <div className="wrap-wide b-rail-head">
+          <div>
+            <p className="b-kicker dark">The Essays</p>
+            <h2 className="b-big">
+              Honest writing
+              <br />
+              about work, and the
+              <br />
+              <em>journey around it.</em>
+            </h2>
+            <p className="b-rail-sub">
+              Two strands, one voice. New essays land on Substack first.
+            </p>
+          </div>
+          <p className="b-rail-hint">Scroll sideways</p>
+        </div>
+
+        <div className="b-rail">
+          {ESSAYS.map((e) => {
+            const lane = LANES.find((l) => l.key === e.lane)!;
+            return (
+              <a
+                className="b-card"
+                key={e.n}
+                href={e.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="b-card-lane">{lane.label}</span>
+                <span className="b-card-num">{e.n}</span>
+                <span className="b-card-title">{e.title}</span>
+                <span className="b-card-excerpt">{e.excerpt}</span>
+                <span className="b-card-date">{e.date}</span>
+              </a>
+            );
+          })}
+          <div className="b-rail-end" aria-hidden="true" />
+        </div>
+      </section>
+
+      {/* ---------- pinned quote over dark bleed ---------- */}
+      <section className="b-quote quote-scene bleed">
+        <div className="b-quote-media" aria-hidden="true">
+          {/* deliberately not .quote-arch — that class is capped at 360px */}
+          <video
+            className="b-quote-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/img/quote-poster.jpg"
+          >
+            <source src="/img/quote-loop.mp4" type="video/mp4" />
+          </video>
+          {/* the still carries small screens and reduced motion */}
+          <Image
+            className="b-quote-still"
+            src="/img/quote-poster.jpg"
+            alt=""
+            width={1400}
+            height={1038}
+            sizes="100vw"
+          />
+        </div>
+        <div className="b-quote-veil" aria-hidden="true" />
+        <blockquote className="b-quote-words quote-words">
+          {QUOTE.map((w, i) => (
+            <span className="w" key={i}>
+              {w}{" "}
+            </span>
+          ))}
+        </blockquote>
+      </section>
+
+      {/* ---------- split: image holds one half edge to edge ---------- */}
+      <section id="about" className="b-split bleed">
+        <div className="b-split-media">
+          <Image
+            src="/img/about-blue.jpg"
+            alt="Cheryl Baptiste at work, mid thought, in a blue dress"
+            width={1600}
+            height={2000}
+            sizes="(max-width: 900px) 100vw, 50vw"
+          />
+        </div>
+        <div className="b-split-copy">
+          <p className="b-kicker">About</p>
+          <h2 className="b-big">
+            Someone saw something in me before I saw it in myself.
           </h2>
-          <p className="on-dark-soft closing-sub gs-reveal">
-            New essays on work, leadership, and the truth in between, delivered by Substack, free.
-            If you&apos;ve felt any of this, or you&apos;re watching it happen around you: come say so.
+          <p>
+            I&apos;ve spent my career trying to be that person for others. Grassroots,
+            nontraditional, no formal HR training, and everything else learned the real way.
           </p>
-          <div className="gs-reveal">
-            <a className="btn on-dark" href={SUBSTACK} target="_blank" rel="noopener noreferrer">
-              Subscribe on Substack
-            </a>
-          </div>
+          <p>
+            Early in my career I decided my integrity was not for sale. That decision has cost me a
+            few times. It would be made again every time.
+          </p>
+          <a className="btn on-dark" href="#essays">
+            Read the essays
+          </a>
+        </div>
+      </section>
+
+      {/* ---------- closing panel ---------- */}
+      <section className="b-cta bleed">
+        <div className="wrap-wide">
+          <p className="script-note big">don&apos;t miss an essay</p>
+          <h2 className="b-huge">
+            The conversation is too
+            <br />
+            <em>important to have alone.</em>
+          </h2>
+          <a className="btn on-dark" href={SUBSTACK} target="_blank" rel="noopener noreferrer">
+            Subscribe on Substack
+          </a>
         </div>
       </section>
     </main>

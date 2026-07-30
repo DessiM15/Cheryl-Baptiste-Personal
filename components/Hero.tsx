@@ -43,10 +43,10 @@ export default function Hero() {
 
         <figure className="hero-plate">
           <Image
-            src="/img/cheryl-hero.jpg"
-            alt="Cheryl Baptiste outdoors, laughing, in a camo jacket"
-            width={1600}
-            height={2000}
+            src="/img/cheryl-pro.jpg"
+            alt="Cheryl Baptiste, arms crossed, in a navy blazer"
+            width={1024}
+            height={1536}
             priority
             sizes="(max-width: 900px) 86vw, 40vw"
           />

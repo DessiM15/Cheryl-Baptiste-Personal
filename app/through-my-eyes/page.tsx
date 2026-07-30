@@ -80,15 +80,27 @@ const SHOTS: Shot[] = [
 
 export default function ThroughMyEyes() {
   return (
-    <main className="gallery-page">
+    <main className="cine gallery-page">
       <ScrollFx />
-      <section className="gallery-head">
-        <div className="wrap">
-          <p className="script-note gs-reveal">places the work has taken me</p>
-          <h1 className="display" data-lines>
-            <span className="line"><span className="line-inner">Through my eyes.</span></span>
+      <section className="b-panel bleed gallery-panel">
+        <Image
+          className="b-panel-img"
+          src="/img/panel.jpg"
+          alt="Cheryl Baptiste speaking on a panel"
+          width={1400}
+          height={1050}
+          sizes="100vw"
+          priority
+        />
+        <div className="b-panel-veil" aria-hidden="true" />
+        <div className="b-panel-copy">
+          <p className="b-kicker">Through my eyes</p>
+          <h1 className="b-huge">
+            Places the work
+            <br />
+            <em>has taken me.</em>
           </h1>
-          <p className="sec-sub gs-reveal">
+          <p className="b-panel-note">
             Panels, boardrooms, conference floors. The rooms this work opens, as I saw them.
           </p>
         </div>
@@ -118,12 +130,15 @@ export default function ThroughMyEyes() {
         </div>
       </section>
 
-      <section className="block-espresso gallery-close">
-        <div className="wrap">
-          <p className="script-note gs-reveal">the conversation continues</p>
-          <div className="gs-reveal">
-            <a className="btn on-dark" href="/#essays">Read the essays</a>
-          </div>
+      <section className="b-cta bleed gallery-close">
+        <div className="wrap-wide">
+          <p className="script-note big">the conversation continues</p>
+          <h2 className="b-huge">
+            The rooms are the setting.
+            <br />
+            <em>The writing is the point.</em>
+          </h2>
+          <a className="btn on-dark" href="/#essays">Read the essays</a>
         </div>
       </section>
     </main>
