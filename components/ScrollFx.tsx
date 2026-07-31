@@ -8,16 +8,27 @@ import Lenis from "lenis";
 export default function ScrollFx() {
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Lenis owns the scroll position, so a plain window.scrollTo would desync it
+    // and snap back. The header dispatches this instead and we drive Lenis.
+    let lenis: Lenis | null = null;
+    const onScrollTop = () => {
+      if (lenis) lenis.scrollTo(0, { immediate: true });
+      else window.scrollTo(0, 0);
+    };
+    window.addEventListener("cb:scroll-top", onScrollTop);
+
     if (reduced) {
       document.documentElement.classList.add("fx-off");
-      return;
+      return () => window.removeEventListener("cb:scroll-top", onScrollTop);
     }
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const lenis = new Lenis({ lerp: 0.11, wheelMultiplier: 1 });
-    lenis.on("scroll", ScrollTrigger.update);
-    const raf = (time: number) => lenis.raf(time * 1000);
+    const l = new Lenis({ lerp: 0.11, wheelMultiplier: 1 });
+    lenis = l;
+    l.on("scroll", ScrollTrigger.update);
+    const raf = (time: number) => l.raf(time * 1000);
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
@@ -29,7 +40,7 @@ export default function ScrollFx() {
       const el = document.querySelector(id);
       if (el) {
         e.preventDefault();
-        lenis.scrollTo(el as HTMLElement, { offset: -70 });
+        l.scrollTo(el as HTMLElement, { offset: -70 });
       }
     };
     document.addEventListener("click", onAnchor);
@@ -131,10 +142,11 @@ export default function ScrollFx() {
     });
 
     return () => {
+      window.removeEventListener("cb:scroll-top", onScrollTop);
       document.removeEventListener("click", onAnchor);
       ctx.revert();
       gsap.ticker.remove(raf);
-      lenis.destroy();
+      l.destroy();
     };
   }, []);
 

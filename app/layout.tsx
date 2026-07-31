@@ -89,7 +89,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(sessionStorage.getItem("cb-intro"))document.documentElement.dataset.intro="done";}catch(e){}`,
+            __html:
+              `try{if(sessionStorage.getItem("cb-intro"))document.documentElement.dataset.intro="done";}catch(e){}` +
+              // Runs before first paint so the browser never restores a
+              // half-scrolled position: a refresh always lands at the top.
+              `try{if("scrollRestoration" in history)history.scrollRestoration="manual";}catch(e){}`,
           }}
         />
         <script

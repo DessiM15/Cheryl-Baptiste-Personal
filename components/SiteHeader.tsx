@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import CameoLockup from "./CameoLockup";
+import { scrollToTop } from "@/lib/scrollToTop";
 
 const SUBSTACK = "https://substack.com/@cherylbaptiste";
 
@@ -28,6 +29,15 @@ export default function SiteHeader() {
 
   const close = () => setOpen(false);
 
+  // Already home: jump straight back to the top instead of reloading the page.
+  // Anywhere else the link navigates normally and lands at the top.
+  const onBrandClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname !== "/" || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    close();
+    scrollToTop();
+  };
+
   return (
     <header
       className={`site-header${scrolled ? " scrolled" : ""}${open ? " menu-open" : ""}`}
@@ -39,7 +49,12 @@ export default function SiteHeader() {
           <a href="/through-my-eyes">Gallery</a>
         </nav>
 
-        <a className="center-brand" href="/" aria-label="Cheryl Baptiste home">
+        <a
+          className="center-brand"
+          href="/"
+          onClick={onBrandClick}
+          aria-label="Cheryl Baptiste home"
+        >
           <CameoLockup size={30} name spin onDark={false} />
         </a>
 
